@@ -191,10 +191,11 @@ private:
    void temperatureError();  
 };
 
-inline extruder::extruder(char name, float spm)
+inline extruder::extruder(char name, float spm, int t_cutoff)
 {
   my_name = name;
   sPerMM = spm;
+  thermalCutoff = t_cutoff;
   pinMode(E_STEP_PIN, OUTPUT);
   pinMode(E_DIR_PIN, OUTPUT);
   digitalWrite(E_STEP_PIN, 0);
@@ -366,7 +367,7 @@ class extruder
 {
   
 public:
-   extruder(byte step, byte dir, byte en, byte heat, byte temp, float spm);
+   extruder(byte step, byte dir, byte en, byte heat, byte temp, float spm, int t_cutoff);
    void waitForTemperature();
    
    void setDirection(bool direction);
@@ -388,6 +389,7 @@ private:
    int targetTemperature;
    int count;
    int oldT, newT;
+   int thermalCutoff;
    float sPerMM;
    long manageCount;
    

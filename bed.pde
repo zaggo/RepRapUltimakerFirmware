@@ -11,10 +11,11 @@
 static PIDcontrol bPID(BED_HEATER_PIN, BED_TEMPERATURE_PIN, true);
 
 
-bed::bed(byte heat, byte temp)
+bed::bed(byte heat, byte temp, int t_cutoff)
 {
   heater_pin = heat;
   temp_pin = temp;
+  thermalCutoff = t_cutoff;
 
   manageCount = 0;
   bedPID = &bPID;
@@ -25,6 +26,8 @@ bed::bed(byte heat, byte temp)
   pinMode(temp_pin, INPUT);
   
   analogWrite(heater_pin, 0);
+  
+  digitalWrite(temp_pin, false);
 
   //these our the default values for the extruder.
 
@@ -101,11 +104,17 @@ void bed::waitForTemperature()
       if(warming)
       {
         if(newT > oldT)
+        {
           oldT = newT;
+          if (newT > thermalCutoff)
+          {
+            temperatureError("Temperature above thermal cutoff (bed overheated) - hard fault.");
+          }
+        }
         else
         {
           // Temp isn't increasing - extruder hardware error
-          temperatureError();
+          temperatureError("Bed temperature not rising - hard fault. Check that heater and sensor are both connected.");
           return;
         }
       }
@@ -123,9 +132,9 @@ void bed::waitForTemperature()
 
 // This is a fatal error - something is wrong with the heater.
 
-void bed::temperatureError()
+void bed::temperatureError(char error[])
 {
-  sprintf(talkToHost.string(), "Bed temperature not rising - hard fault.");
+  sprintf(talkToHost.string(), error);
   talkToHost.setFatal();
 }
 

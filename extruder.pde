@@ -54,12 +54,19 @@ void extruder::waitForTemperature()
       if(warming)
       {
         if(newT > oldT)
+        {
           oldT = newT;
+          if (newT > thermalCutoff)
+          {
+            sprintf(talkToHost.string(), "Temperature above thermal cutoff (extruder overheated) - hard fault.");
+            talkToHost.setFatal();
+          }
+        }
         else
         {
           // Temp isn't increasing - extruder hardware error
-          temperatureError();
-          return;
+          sprintf(talkToHost.string(), "Extruder temperature not rising - hard fault. Check that heater and sensor are both connected.");
+          talkToHost.setFatal();
         }
       }
 
@@ -74,13 +81,6 @@ void extruder::waitForTemperature()
   }
 }
 
-// This is a fatal error - something is wrong with the heater.
-
-void extruder::temperatureError()
-{
-  sprintf(talkToHost.string(), "Extruder temperature not rising - hard fault.");
-  talkToHost.setFatal();
-}
 
 /***************************************************************************************************************************
  * 
@@ -89,7 +89,7 @@ void extruder::temperatureError()
 
 #if MOTHERBOARD == 1 
 
-extruder::extruder(byte md_pin, byte ms_pin, byte h_pin, byte f_pin, byte t_pin, byte vd_pin, byte ve_pin, byte se_pin, float spm)
+extruder::extruder(byte md_pin, byte ms_pin, byte h_pin, byte f_pin, byte t_pin, byte vd_pin, byte ve_pin, byte se_pin, float spm, int t_cutoff)
 {
   motor_dir_pin = md_pin;
   motor_speed_pin = ms_pin;
@@ -100,6 +100,7 @@ extruder::extruder(byte md_pin, byte ms_pin, byte h_pin, byte f_pin, byte t_pin,
   valve_en_pin = ve_pin;
   step_en_pin = se_pin;
   sPerMM = spm;
+  thermalCutoff = t_cutoff;
   
   //setup our pins
   pinMode(motor_dir_pin, OUTPUT);
@@ -116,7 +117,10 @@ extruder::extruder(byte md_pin, byte ms_pin, byte h_pin, byte f_pin, byte t_pin,
   analogWrite(heater_pin, 0);
   analogWrite(motor_speed_pin, 0);
   digitalWrite(valve_dir_pin, false);
-  digitalWrite(valve_en_pin, 0);
+  digitalWrite(valve_en_pin, false);
+
+  //Tighing input pins to ground (If these become disconnected they will go to gnd)
+  digitalWrite(temp_pin, false);
 
   // The step enable pin and the fan pin are the same...
   // We can have one, or the other, but not both
@@ -282,7 +286,7 @@ static PIDcontrol ePID(EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, false)
 
 // Motherboard 3 - Arduino Mega
 
-extruder::extruder(byte stp, byte dir, byte en, byte heat, byte temp, float spm)
+extruder::extruder(byte stp, byte dir, byte en, byte heat, byte temp, float spm, int t_cutoff)
 {
   motor_step_pin = stp;
   motor_dir_pin = dir;
@@ -292,6 +296,7 @@ extruder::extruder(byte stp, byte dir, byte en, byte heat, byte temp, float spm)
   sPerMM = spm;
   manageCount = 0;
   extruderPID = &ePID;
+  thermalCutoff = t_cutoff;
   
   //fan_pin = ;
 

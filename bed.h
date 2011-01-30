@@ -12,7 +12,7 @@ class bed
 {
   
 public:
-   bed(byte heat, byte temp);
+   bed(byte heat, byte temp, int t_cutoff);
    void waitForTemperature();
    
    void setTemperature(int temp);
@@ -26,13 +26,14 @@ private:
    int targetTemperature;
    int count;
    int oldT, newT;
+   int thermalCutoff;
    long manageCount;
    
    PIDcontrol* bedPID;    // Temperature control - extruder...
 
    int sampleTemperature();
    void controlTemperature();
-   void temperatureError(); 
+   void temperatureError(char error[]); 
 
 // The pins we control
    byte heater_pin,  temp_pin;
