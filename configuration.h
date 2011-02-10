@@ -28,7 +28,7 @@
 #define EXTRUDER_COUNT 1
 
 // The emergeny shutoff temperatures for the extruder and bed heaters to prevent overheating
-#define THERMAL_CUTOFF 250
+#define THERMAL_CUTOFF 290
 #define BED_THERMAL_CUTOFF 120
 
 //*********************************************************************************************
