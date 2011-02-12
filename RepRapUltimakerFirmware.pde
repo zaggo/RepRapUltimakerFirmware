@@ -92,7 +92,7 @@ static extruder ex1(EXTRUDER_1_STEP_PIN, EXTRUDER_1_DIR_PIN, EXTRUDER_1_ENABLE_P
 
 static extruder ex0(EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_PIN, EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF); 
 
-static bed heatedBed(BED_HEATER_PIN, BED_TEMPERATURE_PIN, THERMAL_CUTOFF);
+static bed heatedBed(BED_HEATER_PIN, BED_TEMPERATURE_PIN, BED_THERMAL_CUTOFF);
 
 #endif
 
@@ -517,4 +517,3 @@ void delayMicrosecondsInterruptible(unsigned int us)
   "0" (us) // 2 cycles
     );
 }
-
