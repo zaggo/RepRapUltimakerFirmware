@@ -41,6 +41,19 @@ void PIDcontrol::reset()
    integral = 0;  
 }
 
+int PIDcontrol::analogReadTempPin()
+{
+  int raw = analogRead(temp_pin);
+  // Fatal error if the thermister is disconnected
+  if (raw == 1023)
+  {
+    sprintf(talkToHost.string(), "error: Thermister or Thermocouple disconnected or broken, please reconnect. hard fault.");
+    talkToHost.setFatal();
+    talkToHost.sendMessage(true);
+  }
+  return raw;
+}
+
 /* 
  Temperature reading function  
  With thanks to: Ryan Mclaughlin - http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1230859336
@@ -56,8 +69,8 @@ void PIDcontrol::internalTemperature()
 #ifdef USE_THERMISTOR
   int raw = 0;
   for(int i = 0; i < 3; i++)
-    raw += analogRead(temp_pin);
-    
+    raw += analogReadTempPin();
+  
   raw = raw/3;
 
   byte i;
@@ -90,7 +103,7 @@ void PIDcontrol::internalTemperature()
 #endif
 
 #ifdef AD595_THERMOCOUPLE
-  currentTemperature = ( 5.0 * analogRead(temp_pin)* 100.0) / 1024.0; //(int)(((long)500*(long)analogRead(TEMP_PIN))/(long)1024);
+  currentTemperature = ( 5.0 * analogReadTempPin() * 100.0) / 1024.0; //(int)(((long)500*(long)analogRead(TEMP_PIN))/(long)1024);
 #endif  
 
 #ifdef MAX6675_THERMOCOUPLE

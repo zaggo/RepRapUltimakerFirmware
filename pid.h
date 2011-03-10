@@ -22,6 +22,7 @@ private:
   float band;
   byte heat_pin, temp_pin;
   int currentTemperature;
+  int analogReadTempPin();
  
 #ifdef USE_THERMISTOR
   void internalTemperature(short table[][2]); 
