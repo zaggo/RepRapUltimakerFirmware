@@ -98,6 +98,7 @@ static bed heatedBed(BED_HEATER_PIN, BED_TEMPERATURE_PIN, BED_THERMAL_CUTOFF);
 
 static hostcom talkToHost;
 
+
 // Each entry in the buffer is an instance of cartesian_dda.
 
 cartesian_dda* cdda[BUFFER_SIZE];

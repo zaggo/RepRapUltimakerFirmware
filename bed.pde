@@ -108,13 +108,13 @@ void bed::waitForTemperature()
           oldT = newT;
           if (newT > thermalCutoff)
           {
-            temperatureError("Temperature above thermal cutoff (bed overheated) - hard fault.");
+            temperatureError("error: Temperature above thermal cutoff (bed overheated) - hard fault.");
           }
         }
         else
         {
           // Temp isn't increasing - extruder hardware error
-          temperatureError("Bed temperature not rising - hard fault. Check that heater and sensor are both connected.");
+          temperatureError("error: Bed temperature not rising - hard fault. Check that heater and sensor are both connected.");
           return;
         }
       }

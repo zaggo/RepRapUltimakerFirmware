@@ -56,16 +56,11 @@ void extruder::waitForTemperature()
         if(newT > oldT)
         {
           oldT = newT;
-          if (newT > thermalCutoff)
-          {
-            sprintf(talkToHost.string(), "Temperature above thermal cutoff (extruder overheated) - hard fault.");
-            talkToHost.setFatal();
-          }
         }
         else
         {
           // Temp isn't increasing - extruder hardware error
-          sprintf(talkToHost.string(), "Extruder temperature not rising - hard fault. Check that heater and sensor are both connected.");
+          sprintf(talkToHost.string(), "error: Extruder temperature not rising - hard fault. Check that heater and sensor are both connected.");
           talkToHost.setFatal();
         }
       }
@@ -217,9 +212,9 @@ int extruder::getTemperature()
   if (celsius > 255) celsius = 255; 
   else if (celsius < 0) celsius = 0; 
 
-  return celsius;
+  return validateTemperature(celsius);
 #else
-  return ( 5.0 * sampleTemperature() * 100.0) / 1024.0;
+  return validateTemperature( ( 5.0 * sampleTemperature() * 100.0) / 1024.0 );
 #endif
 }
 
