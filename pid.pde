@@ -50,8 +50,6 @@ void PIDcontrol::reset()
 int PIDcontrol::analogReadTempPin()
 {
   int raw = analogRead(temp_pin);
-    talkToHost.put(raw);
-    talkToHost.sendMessage(true);
   // Fatal error if the thermister is disconnected
   if (raw == 1023)
   {
