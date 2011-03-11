@@ -24,7 +24,13 @@ PIDcontrol::PIDcontrol(byte hp, byte tp, bool b)
    currentTemperature = 0;
    reset();
    pinMode(heat_pin, OUTPUT);
-   pinMode(temp_pin, INPUT); 
+   pinMode(temp_pin, INPUT);
+
+#ifdef AD595_THERMOCOUPLE
+   // This is a internal pull up resister. Gaurenteeing the thermocouple will
+   // go to 1023 when disconnected.
+   digitalWrite(temp_pin, HIGH);
+#endif
 }
 
 /*
