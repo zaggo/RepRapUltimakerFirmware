@@ -103,6 +103,12 @@ extruder::extruder(byte md_pin, byte ms_pin, byte h_pin, byte f_pin, byte t_pin,
   pinMode(heater_pin, OUTPUT);
 
   pinMode(temp_pin, INPUT);
+#ifdef AD595_THERMOCOUPLE
+   // This is a internal pull up resister. Gaurenteeing the thermocouple will
+   // go to 1023 when disconnected.
+   digitalWrite(temp_pin, HIGH);
+#endif
+
   pinMode(valve_dir_pin, OUTPUT); 
   pinMode(valve_en_pin, OUTPUT);
 

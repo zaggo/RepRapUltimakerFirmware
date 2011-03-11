@@ -50,10 +50,20 @@ void PIDcontrol::reset()
 int PIDcontrol::analogReadTempPin()
 {
   int raw = analogRead(temp_pin);
+    talkToHost.put(raw);
+    talkToHost.sendMessage(true);
   // Fatal error if the thermister is disconnected
   if (raw == 1023)
   {
-    sprintf(talkToHost.string(), "error: Thermister or Thermocouple disconnected or broken, please reconnect. hard fault.");
+
+#ifdef USE_THERMISTOR
+    sprintf(talkToHost.string(), "error: Thermister disconnected or broken, please reconnect. hard fault.");
+#endif
+
+#ifdef AD595_THERMOCOUPLE
+    sprintf(talkToHost.string(), "error: Thermocouple board disconnected or broken, please reconnect. hard fault.");
+#endif
+
     talkToHost.setFatal();
     talkToHost.sendMessage(true);
   }
@@ -197,7 +207,7 @@ void PIDcontrol::validateTemperature(int t)
 //  if (t > thermalCutoff)
   if (t > THERMAL_CUTOFF)
   {
-    sprintf(talkToHost.string(), "error: Temperature above thermal cutoff (extruder overheated) - hard fault.");
+    sprintf(talkToHost.string(), "error: Temperature above thermal cutoff (extruder overheated) or sensor disconnected - hard fault.");
     talkToHost.setFatal();
     talkToHost.sendMessage(true);
   }
