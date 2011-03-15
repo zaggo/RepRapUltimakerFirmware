@@ -13,3 +13,7 @@ This Ultimaker firmware is based on the RepRap FiveD firmware and will be update
 
 For a nice, compatible ReplicatorG version, see this github page:
 http://github.com/ErikDeBruijn/ReplicatorG-Erik5D
+
+TODO
+======
+ - Fancy needs to be readded outside the heater to update the temperature on the LCD display

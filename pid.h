@@ -20,8 +20,10 @@ private:
   float iGain;
   float dGain;
   float band;
+  float targetTemp;
   byte heat_pin, temp_pin;
   int currentTemperature;
+
   int analogReadTempPin();
  
 #ifdef USE_THERMISTOR

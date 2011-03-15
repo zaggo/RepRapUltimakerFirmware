@@ -51,15 +51,15 @@ int PIDcontrol::analogReadTempPin()
 {
   int raw = analogRead(temp_pin);
   // Fatal error if the thermister is disconnected
-  if (raw == 1023)
+  if (raw == 1023 && targetTemp != 0)
   {
 
 #ifdef USE_THERMISTOR
-    sprintf(talkToHost.string(), "error: Thermister disconnected or broken, please reconnect. hard fault.");
+    sprintf(talkToHost.string(), "error: Thermister disconnected or broken, please reconnect and reset. hard fault.");
 #endif
 
 #ifdef AD595_THERMOCOUPLE
-    sprintf(talkToHost.string(), "error: Thermocouple board disconnected or broken, please reconnect. hard fault.");
+    sprintf(talkToHost.string(), "error: Thermocouple board disconnected or broken, please reconnect and reset. hard fault.");
 #endif
 
     talkToHost.setFatal();
@@ -203,9 +203,9 @@ if((fancy_iterator++)==40)
 void PIDcontrol::validateTemperature(int t)
 {
 //  if (t > thermalCutoff)
-  if (t > THERMAL_CUTOFF)
+  if (t > THERMAL_CUTOFF && targetTemp != 0)
   {
-    sprintf(talkToHost.string(), "error: Temperature above thermal cutoff (extruder overheated) or sensor disconnected - hard fault.");
+    sprintf(talkToHost.string(), "error: Temperature above thermal cutoff (extruder overheated) or sensor disconnected. Please fix and reset. hard fault.");
     talkToHost.setFatal();
     talkToHost.sendMessage(true);
   }
@@ -215,9 +215,10 @@ void PIDcontrol::validateTemperature(int t)
 void PIDcontrol::pidCalculation(int target)
 {
   String outString ="";
-#ifdef FANCY_LCD
-targetTemp = target;
-#endif
+  targetTemp = target;
+talkToHost.put(targetTemp);
+talkToHost.put(target);
+
 // New ifdef fixes compilation error with thermocouples
 #ifdef USE_THERMISTOR
   if(doingBed)
