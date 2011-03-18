@@ -19,14 +19,11 @@ Supported Platforms
 
 Please note that to better focus on current hardwares the Ultimaker firmware does not support RepRap Gen 3 or earlier electronics. The Ultimaker firmware is designed for the Ultimaker PCB and similar Arduino Mega-based hardware.
 
-What we _don't_ support:
- - We do not support Gen 3 hardware.
- - We do not support Gen 2 hadware.
-
 What we _do_ support:
  - We do support Arduino Mega Ultimaker hardware
  - We do support Arduino Mega RAMPS hardware
 
-TODO
-======
- - Fancy needs to be readded outside the heater to update the temperature on the LCD display
+What we _don't_ support:
+ - We do not support Gen 3 hardware.
+ - We do not support Gen 2 hadware.
+

@@ -212,7 +212,7 @@ void shutdown()
 }
 
 
-/*void handle_heater_errors_and_debug(*Heater h, int error_code)
+void handle_heater_out(Heater *h, int error_code)
 {
   // heater debugging output (if enabled)
 #ifdef DEBUG_PID
@@ -225,7 +225,6 @@ void shutdown()
         PID_LETTERS[i],
         (int)(h->pid_gains[i] * (i == pid_i? 1 : 1000) ) );
 
-    sprintf(talkToHost.string(), ", OUT: %d", (byte) output);
     talkToHost.sendMessage(true);
   }
 #endif
@@ -234,10 +233,10 @@ void shutdown()
   // handle heater errors
   if (error_code == 0) return;
 
-  sprintf(talkToHost.string(), "error: %d", heater_error_message(*h, error_code) );
+  sprintf(talkToHost.string(), "error: %d", heater_error_message(h, error_code) );
   talkToHost.setFatal();
   talkToHost.sendMessage(true);
-}*/
+}
 
 
 // Keep all extruders, bed, up to temperature etc.
@@ -246,11 +245,11 @@ void manage()
   // manage the extruders
   for(byte i = 0; i < EXTRUDER_COUNT; i++)
   {
-//    handle_heater_errors_and_debug( &(ex[i]->heater), ex[i]->manage() );
+    handle_heater_out( ex[i]->heater, ex[i]->manage() );
   }
 
   // manage the heated bed
-//  handle_heater_errors_and_debug( heatedBed, heater_update(heatedBed) );
+  handle_heater_out( heatedBed, heater_update(heatedBed) );
 
   // manage the fancy lcd display
 #ifdef FANCY_LCD
