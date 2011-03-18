@@ -18,7 +18,9 @@ int heater_alternate = true;
 int fancy_iterator = 0;
 int bedTemp = 0; // for showing this on the display
 int targetTemp = 0; // for showing this on the display
+
 void fancy_init();
+void fancy_update();
 void setRGB(byte r, byte g, byte b);
 void set_RGB_R(byte r);
 void set_RGB_G(byte g);

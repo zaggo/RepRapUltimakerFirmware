@@ -8,9 +8,8 @@
 #include "hostcom.h"
 #include "intercom.h"
 #include "pins.h"
-#include "Temperature.h"
-#include "pid.h"
-#include "bed.h"
+#include "thermistor.h"
+#include "heater.h" 
 #include "extruder.h"
 #include "cartesian_dda.h"
 #include "fancy.h"
@@ -46,55 +45,14 @@ extruder* ex[EXTRUDER_COUNT];
 byte extruder_in_use = 0;
 
 
-// Old Mothers...
-
-#if MOTHERBOARD == 1
-
-// TODO: For some reason, if you declare the following two in the order ex0 ex1 then
-// ex0 won't drive its stepper.  They seem fine this way round though.  But that's got
-// to be a bug.
-
-#if EXTRUDER_COUNT == 2            
-static extruder ex1(EXTRUDER_1_MOTOR_DIR_PIN, EXTRUDER_1_MOTOR_SPEED_PIN , EXTRUDER_1_HEATER_PIN,
-              EXTRUDER_1_FAN_PIN,  EXTRUDER_1_TEMPERATURE_PIN, EXTRUDER_1_VALVE_DIR_PIN,
-              EXTRUDER_1_VALVE_ENABLE_PIN, EXTRUDER_1_STEP_ENABLE_PIN, E1_STEPS_PER_MM, THERMAL_CUTOFF);            
-#endif
-
-static extruder ex0(EXTRUDER_0_MOTOR_DIR_PIN, EXTRUDER_0_MOTOR_SPEED_PIN , EXTRUDER_0_HEATER_PIN,
-            EXTRUDER_0_FAN_PIN,  EXTRUDER_0_TEMPERATURE_PIN, EXTRUDER_0_VALVE_DIR_PIN,
-            EXTRUDER_0_VALVE_ENABLE_PIN, EXTRUDER_0_STEP_ENABLE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF);
-   
-static bed heatedBed(BED_HEATER_PIN, BED_TEMPERATURE_PIN, BED_THERMAL_CUTOFF);
-
-#endif
-
-// Standard Mendel
-
-#if MOTHERBOARD == 2
-
-#if EXTRUDER_COUNT == 2    
-static extruder ex1(E1_NAME, E1_STEPS_PER_MM, THERMAL_CUTOFF);            
-#endif
-
-static extruder ex0(E0_NAME, E0_STEPS_PER_MM, THERMAL_CUTOFF);
-
-intercom talker;
-
-#endif
-
-// Arduino Mega
-
-#if MOTHERBOARD == 3
-
 #if EXTRUDER_COUNT == 2            
 static extruder ex1(EXTRUDER_1_STEP_PIN, EXTRUDER_1_DIR_PIN, EXTRUDER_1_ENABLE_PIN, EXTRUDER_1_HEATER_PIN, EXTRUDER_1_TEMPERATURE_PIN, E1_STEPS_PER_MM, THERMAL_CUTOFF);            
 #endif
 
 static extruder ex0(EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_PIN, EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF); 
 
-static bed heatedBed(BED_HEATER_PIN, BED_TEMPERATURE_PIN, BED_THERMAL_CUTOFF);
+static Heater *heatedBed;
 
-#endif
 
 static hostcom talkToHost;
 
@@ -158,7 +116,9 @@ void setup()
   interruptBlink = 0;
   pinMode(DEBUG_PIN, OUTPUT);
   led = false;
-  
+
+  init_thermistor_tables();
+
   setupGcodeProcessor();
   
   ex[0] = &ex0;
@@ -184,12 +144,21 @@ void setup()
   
   talkToHost.start();
   
-#if MOTHERBOARD == 2 
-    pinMode(PS_ON_PIN, OUTPUT);  // add to run G3 as built by makerbot
-    digitalWrite(PS_ON_PIN, LOW);   // ditto
-    delay(2000);    
-    rs485Interface.begin(RS485_BAUD);  
-#endif
+	// Heated Bed Heater
+	heater_init(heatedBed);
+	heatedBed->heater_pin = BED_HEATER_PIN;
+
+	heatedBed->pid_gains[pid_p] = B_TEMP_PID_PGAIN;
+	heatedBed->pid_gains[pid_i] = B_TEMP_PID_IGAIN;
+	heatedBed->pid_gains[pid_d] = B_TEMP_PID_DGAIN;
+		
+	// Heated Bed Temperature Sensor
+	heatedBed->sensor_pin = BED_TEMPERATURE_PIN;
+	heatedBed->sensor = BED_TEMPERATURE_SENSOR;
+	heatedBed->thermal_cutoff = BED_THERMAL_CUTOFF;
+	heatedBed->thermister_temp_table = bed_temp_table;
+//temptable
+
 
   setTimer(DEFAULT_TICK);
   enableTimerInterrupt();
@@ -216,11 +185,9 @@ void shutdown()
 
   // Motors off
   
-#if MOTHERBOARD > 0  
   digitalWrite(X_ENABLE_PIN, !ENABLE_ON);
   digitalWrite(Y_ENABLE_PIN, !ENABLE_ON);
   digitalWrite(Z_ENABLE_PIN, !ENABLE_ON);
-#endif
 
   // Stop the extruders
   
@@ -229,9 +196,7 @@ void shutdown()
 
 // If we run the bed, turn it off.
 
-#if MOTHERBOARD != 2
-  heatedBed.shutdown();
-#endif
+  heater_shutdown(heatedBed);
 
 //  int a=50;
 //  while(a--) {blink(); delay(50);}
@@ -247,16 +212,52 @@ void shutdown()
 }
 
 
-// Keep all extruders, bed, up to temperature etc.
+/*void handle_heater_errors_and_debug(*Heater h, int error_code)
+{
+  // heater debugging output (if enabled)
+#ifdef DEBUG_PID
+  if(h->heater_pin == DEBUG_PID)
+  {
+    sprintf(talkToHost.string(), "target %d, cur %d, err %d", h->target, h->instantaneous, h->pid_values[pid_p]);
+    
+    for (int i =0; i < PID_LENGTH; i ++)
+      sprintf(talkToHost.string(), ", %d: %d", 
+        PID_LETTERS[i],
+        (int)(h->pid_gains[i] * (i == pid_i? 1 : 1000) ) );
 
+    sprintf(talkToHost.string(), ", OUT: %d", (byte) output);
+    talkToHost.sendMessage(true);
+  }
+#endif
+
+
+  // handle heater errors
+  if (error_code == 0) return;
+
+  sprintf(talkToHost.string(), "error: %d", heater_error_message(*h, error_code) );
+  talkToHost.setFatal();
+  talkToHost.sendMessage(true);
+}*/
+
+
+// Keep all extruders, bed, up to temperature etc.
 void manage()
 {
+  // manage the extruders
   for(byte i = 0; i < EXTRUDER_COUNT; i++)
-    ex[i]->manage();
-#if MOTHERBOARD != 2    
-  heatedBed.manage();
-#endif  
+  {
+//    handle_heater_errors_and_debug( &(ex[i]->heater), ex[i]->manage() );
+  }
+
+  // manage the heated bed
+//  handle_heater_errors_and_debug( heatedBed, heater_update(heatedBed) );
+
+  // manage the fancy lcd display
+#ifdef FANCY_LCD
+  fancy_update();
+#endif
 }
+
 
 //long count = 0;
 //int ct1 = 0;
@@ -266,9 +267,6 @@ void loop()
   nonest = false;
    manage();
    get_and_do_command(); 
-#if MOTHERBOARD == 2
-   talker.tick();
-#endif
 }
 
 //******************************************************************************************

@@ -470,12 +470,12 @@ void process_string(char instruction[], int size)
 
 			//Inches for Units
 			case 20:
-                                setUnits(false);
+        setUnits(false);
 				break;
 
 			//mm for Units
 			case 21:
-                                setUnits(true);
+        setUnits(true);
 				break;
 
 			//Absolute Positioning
@@ -490,13 +490,13 @@ void process_string(char instruction[], int size)
 
 			//Set position as fp
 			case 92: 
-                                setPosition(fp);
+        setPosition(fp);
 				break;
 
 			default:
 				if(SendDebug & DEBUG_ERRORS)
-                                  sprintf(talkToHost.string(), "Dud G code: G%d", gc.G);
-                                talkToHost.setResend(gc.LastLineNrRecieved+1);
+          sprintf(talkToHost.string(), "Dud G code: G%d", gc.G);
+        talkToHost.setResend(gc.LastLineNrRecieved+1);
 		  }
 	}
 
@@ -506,15 +506,14 @@ void process_string(char instruction[], int size)
 	//find us an m code.
 	if (gc.seen & GCODE_M)
 	{
-            // Wait till the q is empty first
-            while(!qEmpty()) delay(WAITING_DELAY);
-            //delay(2*WAITING_DELAY);
+    // Wait till the q is empty first
+    while(!qEmpty()) delay(WAITING_DELAY);
+    //delay(2*WAITING_DELAY);
 		switch (gc.M)
 		{
-			
-                        
+
 			case 0:
-                                shutdown();
+        shutdown();
 				break;
 				/*
 				 case 1:
@@ -555,12 +554,8 @@ void process_string(char instruction[], int size)
 
 			//custom code for temperature reading
 			case 105:
-                                talkToHost.setETemp(ex[extruder_in_use]->getTemperature());
-#if MOTHERBOARD == 2
-                                talkToHost.setBTemp(ex[0]->getBedTemperature());
-#else
-                                talkToHost.setBTemp(heatedBed.getTemperature());
-#endif
+        talkToHost.setETemp(ex[extruder_in_use]->getTemperature());
+        talkToHost.setBTemp(heatedBed->current);
 				break;
 
 			//turn fan on
@@ -576,8 +571,8 @@ void process_string(char instruction[], int size)
 
                         // Set the temperature and wait for it to get there
 			case 109:
-				ex[extruder_in_use]->setTemperature((int)gc.S);
-                                ex[extruder_in_use]->waitForTemperature();
+				ex[extruder_in_use]->setTemperature((float)gc.S);
+        ex[extruder_in_use]->waitForTemperature();
 				break;
                         // Starting a new print, reset the gc.LastLineNrRecieved counter
 			case 110:
@@ -592,56 +587,47 @@ void process_string(char instruction[], int size)
 				break;
 
 // If there's an S field, use that to set the PWM, otherwise use the pot.
-                       case 108: // Depricated
-                       case 113:
-                                #if MOTHERBOARD == 2
-                                 if (gc.seen & GCODE_S)
-                                     ex[extruder_in_use]->setPWM((int)(255.0*gc.S + 0.5));
-                                  else
-                                     ex[extruder_in_use]->usePotForMotor();
-                                #endif
+       case 108: // Depricated
+				break;
+       case 113: // Not used on the Arduino Mega
 				break;
 
 			//custom code for returning current coordinates
 			case 114:
-                                talkToHost.setCoords(where_i_am);
+        talkToHost.setCoords(where_i_am);
 				break;
 
 
-                        // TODO: make this work properly
-                        case 116:
-                             ex[extruder_in_use]->waitForTemperature();
-				break;   
+      // TODO: make this work properly
+      case 116:
+           ex[extruder_in_use]->waitForTemperature();
+			break;   
 
 // The valve (real, or virtual...) is now the way to control any extruder (such as
 // a pressurised paste extruder) that cannot move using E codes.
 
-                        // Open the valve
-                        case 126:
-                                ex[extruder_in_use]->valveSet(true, (int)(gc.P + 0.5));
-                                break;
-                                
-                        // Close the valve
-                        case 127:
-                                ex[extruder_in_use]->valveSet(false, (int)(gc.P + 0.5));
-                                break;
-                                                                
-                        case 140:
-				if (gc.seen & GCODE_S)
-				{
-#if MOTHERBOARD == 2
-					ex[0]->setBedTemperature((int)gc.S);
-#else
-					heatedBed.setTemperature((int)gc.S);
-#endif				
-                                }
-				break;
+      // Open the valve
+      case 126:
+              ex[extruder_in_use]->valveSet(true, (int)(gc.P + 0.5));
+              break;
 
-                        case 141: //TODO: set chamber temperature
-                                break;
-                                
-                        case 142: //TODO: set holding pressure
-                                break;                                
+      // Close the valve
+      case 127:
+              ex[extruder_in_use]->valveSet(false, (int)(gc.P + 0.5));
+              break;
+
+      case 140:
+        if (gc.seen & GCODE_S)
+        {
+          heatedBed->target = (float)gc.S;
+        }
+        break;
+
+      case 141: //TODO: set chamber temperature
+              break;
+              
+      case 142: //TODO: set holding pressure
+              break;                                
 
 			default:
 				if(SendDebug & DEBUG_ERRORS)
