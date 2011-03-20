@@ -282,7 +282,7 @@ void heater_shutdown(Heater *h)
 char* heater_error_message(Heater *h, int error_code)
 {
   char* sensor_name = TEMPERATURE_SENSOR_NAMES[h->sensor];
-  char* message;
+  char* message ="";
 
   switch (error_code)
   {

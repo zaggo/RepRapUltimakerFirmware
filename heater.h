@@ -1,12 +1,12 @@
 #ifndef HEATER_H
 #define HEATER_H
 
-typedef enum
+enum temperature_sensor_type
 {
   temperature_sensor_type_thermistor = 0,
   temperature_sensor_type_ad595_thermocouple = 1,
   temperature_sensor_type_max6675_thermocouple = 2
-} temperature_sensor_type;
+};
 
 char *TEMPERATURE_SENSOR_NAMES[3] = {"thermister", "AD595 thermocouple", "MAX6675 thermocouple"};
 

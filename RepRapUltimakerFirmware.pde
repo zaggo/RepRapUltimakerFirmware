@@ -233,7 +233,7 @@ void handle_heater_out(Heater *h, int error_code)
   // handle heater errors
   if (error_code == 0) return;
 
-  sprintf(talkToHost.string(), "error: %d", heater_error_message(h, error_code) );
+  sprintf(talkToHost.string(), "error: %s", heater_error_message(h, error_code) );
   talkToHost.setFatal();
   talkToHost.sendMessage(true);
 }
