@@ -4,12 +4,12 @@
 #include <avr/pgmspace.h>
 #include "WProgram.h"
 #include "vectors.h"
+#include "thermistor.h"
+#include "heater.h" 
 #include "configuration.h"
 #include "hostcom.h"
 #include "intercom.h"
 #include "pins.h"
-#include "thermistor.h"
-#include "heater.h" 
 #include "extruder.h"
 #include "cartesian_dda.h"
 #include "fancy.h"
@@ -110,14 +110,15 @@ ISR(TIMER1_COMPA_vect)
 
 void setup()
 {
+  talkToHost.put("init?");
+  init_thermistor_tables();
+
   nonest = false;
   disableTimerInterrupt();
   setupTimerInterrupt();
   interruptBlink = 0;
   pinMode(DEBUG_PIN, OUTPUT);
   led = false;
-
-  init_thermistor_tables();
 
   setupGcodeProcessor();
   
@@ -212,8 +213,9 @@ void shutdown()
 }
 
 
-void handle_heater_out(Heater *h, int error_code)
+void handle_heater_out(Heater *h, char* name, int error_code)
 {
+  talkToHost.put("reading output\n");
   // heater debugging output (if enabled)
 #ifdef DEBUG_PID
   if(h->heater_pin == DEBUG_PID)
@@ -224,7 +226,7 @@ void handle_heater_out(Heater *h, int error_code)
       sprintf(talkToHost.string(), ", %d: %d", 
         PID_LETTERS[i],
         (int)(h->pid_gains[i] * (i == pid_i? 1 : 1000) ) );
-
+ 
     talkToHost.sendMessage(true);
   }
 #endif
@@ -233,28 +235,36 @@ void handle_heater_out(Heater *h, int error_code)
   // handle heater errors
   if (error_code == 0) return;
 
-  sprintf(talkToHost.string(), "error: %s", heater_error_message(h, error_code) );
+  sprintf(talkToHost.string(), "error: %s %s", name, heater_error_message(h, error_code) );
   talkToHost.setFatal();
   talkToHost.sendMessage(true);
 }
 
+char *EXTRUDER_NAME = "extruder";
+char *HEATED_BED_NAME = "heated bed";
 
 // Keep all extruders, bed, up to temperature etc.
 void manage()
 {
+//  talkToHost.put("starting manage\n");
   // manage the extruders
   for(byte i = 0; i < EXTRUDER_COUNT; i++)
   {
-    handle_heater_out( ex[i]->heater, ex[i]->manage() );
+//  talkToHost.put("starting extruder\n");
+//    handle_heater_out( ex[i]->heater, EXTRUDER_NAME, ex[i]->manage() );
+//  talkToHost.put("ending extruder\n");
   }
 
   // manage the heated bed
-  handle_heater_out( heatedBed, heater_update(heatedBed) );
+//  talkToHost.put("starting heater\n");
+//  handle_heater_out( heatedBed, HEATED_BED_NAME, heater_update(heatedBed) );
+//  talkToHost.put("ending heater\n");
 
   // manage the fancy lcd display
 #ifdef FANCY_LCD
   fancy_update();
 #endif
+  talkToHost.put("mini-mooo");
 }
 
 
@@ -264,8 +274,9 @@ void manage()
 void loop()
 {
   nonest = false;
-   manage();
-   get_and_do_command(); 
+  talkToHost.put("loop");
+//   manage();
+//   get_and_do_command(); 
 }
 
 //******************************************************************************************

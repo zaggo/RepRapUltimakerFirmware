@@ -14,4 +14,6 @@ typedef struct
 extern ThermisterTemperatureTable *bed_temp_table;
 extern ThermisterTemperatureTable *temp_table;
 
+void init_thermistor_tables();
+
 #endif

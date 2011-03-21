@@ -13,7 +13,7 @@
 ThermisterTemperatureTable *bed_temp_table;
 ThermisterTemperatureTable *temp_table;
 
-#define TEMP_TABLE_LENGTH 20
+#define TEMP_TABLE_LENGTH (20)
 short TEMP_TABLE_ARRAY[TEMP_TABLE_LENGTH][2] = {
      {1, 599},
      {54, 160},
@@ -42,7 +42,7 @@ short TEMP_TABLE_ARRAY[TEMP_TABLE_LENGTH][2] = {
 // Used by BitsFromBytes (3.0, 3.1)
 // 1k5 Ohm to Vcc. In parallel with 4K7 Ohm to ground.
 
-#define BED_TEMP_TABLE_LENGTH 30
+#define BED_TEMP_TABLE_LENGTH (30)
 short BED_TEMP_TABLE_ARRAY[BED_TEMP_TABLE_LENGTH][2] = {
   {85,300},
   {97,290},
@@ -78,9 +78,12 @@ short BED_TEMP_TABLE_ARRAY[BED_TEMP_TABLE_LENGTH][2] = {
 
 void init_thermistor_tables()
 {
+    talkToHost.put("<tableInit>");
   bed_temp_table->length = BED_TEMP_TABLE_LENGTH;
   bed_temp_table->table = (short **) &BED_TEMP_TABLE_ARRAY;
 
   temp_table->length = TEMP_TABLE_LENGTH;
   temp_table->table = (short **) &TEMP_TABLE_ARRAY;
+    talkToHost.put("</tableInit>");
+
 }

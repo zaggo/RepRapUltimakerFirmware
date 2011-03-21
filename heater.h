@@ -18,6 +18,8 @@ char PID_LETTERS[PID_LENGTH] = {'p', 'i', 'd'};
 // the number of heater temperatures to average in the current value.
 #define HEATER_HISTORY_LENGTH (5)
 
+#define PID_INTEGRAL_LIMIT (200/0.15)
+
 
 /* ----------------------
  * Heater data structure
@@ -33,7 +35,7 @@ typedef struct
   int sensor_pin;
   temperature_sensor_type sensor;
   float thermal_cutoff; // The degrees celcius at which the machine is shut down to prevent overheating.
-  ThermisterTemperatureTable *thermister_temp_table; // (thermister only, maps analog values => temperatures in deg. celsius)
+  ThermisterTemperatureTable* thermister_temp_table; // (thermister only, maps analog values => temperatures in deg. celsius)
   int thermister_temp_table_length;
 
   // Current values

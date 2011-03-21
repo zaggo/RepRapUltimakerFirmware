@@ -103,7 +103,7 @@ extruder::extruder(byte stp, byte dir, byte en, byte heat, byte temp, float spm,
 }
 
 int extruder::controlTemperature()
-{   
+{
   return heater_update(heater);
 }
 
