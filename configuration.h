@@ -39,8 +39,8 @@
 
 // Temperature measurement
 // Uncomment ONE of the next three
-#define USE_THERMISTOR
-//#define AD595_THERMOCOUPLE
+//#define USE_THERMISTOR
+#define AD595_THERMOCOUPLE
 //#define MAX6675_THERMOCOUPLE
 
 // Uncomment the next line if this is driving a paste extruder
@@ -148,8 +148,8 @@
 #if MOTHERBOARD == 3
 
 // Comment out this if you are using a thermocouple
-#define USE_THERMISTOR
-//#define AD595_THERMOCOUPLE
+//#define USE_THERMISTOR
+#define AD595_THERMOCOUPLE
 //#define MAX6675_THERMOCOUPLE
 
 // Set to 1 if enable pins are inverting
@@ -159,33 +159,33 @@
 
 // Set ENDSTOP_PULL_UPS to "true" if you're using microswitches
 // This will put a logical high in the input pins by connecting an internal 20K resistor to Vcc.
-#define ENDSTOP_PULL_UPS false
+#define ENDSTOP_PULL_UPS true
 
 // Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
 // RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
 // are inverting.
-// Set [XYZ]_ENDSTOP_INVERTING to "true" for using microswitches.
+// Set [XYZ]_ENDSTOP_INVERTING to "true" for using microswitches that pull to ground when activated.
 
-#define X_ENDSTOP_INVERTING true
-#define Y_ENDSTOP_INVERTING true
-#define Z_ENDSTOP_INVERTING true
+#define X_ENDSTOP_INVERTING false
+#define Y_ENDSTOP_INVERTING false
+#define Z_ENDSTOP_INVERTING false
 
 // Motherboard 3 driving Pololu microstepping controllers - 16 microsteps
 
 // Axis scaling in stepper-motor steps per mm of movement
 
 // Select 1/16 STEP!
-#define X_STEPS_PER_MM   79.87220447 //Ultimaker's belt pitch is 2.032mm. 2.032*20=40.064. 40.064/200/16 mm/step
-#define INVERT_X_DIR 1
+#define X_STEPS_PER_MM   100*16/3 //Ultimaker's belt pitch is 2.032mm. 2.032*20=40.064. 40.064/200/16 mm/step
+#define INVERT_X_DIR 0
 
 // Select 1/16 STEP!
-#define Y_STEPS_PER_MM   79.87220447
+#define Y_STEPS_PER_MM   100*16/3
 #define INVERT_Y_DIR 0
 
 // If you want to be able to move this very fast and not run into firmware problems, use or configure the stepper motor driver for the Z-axis
 // as QUARTER STEP MODE (Polulu: LOW/HIGH/LOW I think)
-#define Z_STEPS_PER_MM   200*8/1.25 //6667.184 
-#define INVERT_Z_DIR 1
+#define Z_STEPS_PER_MM   100*16/3 //6667.184 
+#define INVERT_Z_DIR 0
 
 // If either of the axes runs in the wrong direction, you can correct this here:
 #define INVERT_X_DIR 0
@@ -207,8 +207,8 @@
 
 // If you want to enable fancy stuff like RGB LEDs for feedback and just to show off.
 // Make sure FANCY is defined if you want to have this enabled, otherwise comment it out.
-//#define FANCY
-//#define FANCY_LCD
+#define FANCY
+#define FANCY_LCD
 
 #endif // end of motherboard 3 specific settings
 
@@ -263,7 +263,7 @@
 
 #define DISABLE_X 0
 #define DISABLE_Y 0
-#define DISABLE_Z 1
+#define DISABLE_Z 0
 #define DISABLE_E 0
 
 // The number of 5-second intervals to wait at the target temperature for things to stabilise.

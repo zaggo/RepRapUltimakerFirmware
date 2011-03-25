@@ -165,23 +165,6 @@ if((fancy_iterator++)==40)
 //}
 }
 #endif
-
-  // Validate the Temperature 
-  validateTemperature(currentTemperature);
-}
-
-/*
- * Validates that the the temperature has not exceeded it's thermal cutoff. The printer is shut down with a fatal error if the thermal cutoff is exceeded.
- */
-void PIDcontrol::validateTemperature(int t)
-{
-//  if (t > thermalCutoff)
-  if (t > THERMAL_CUTOFF)
-  {
-    sprintf(talkToHost.string(), "error: Temperature above thermal cutoff (extruder overheated) - hard fault.");
-    talkToHost.setFatal();
-    talkToHost.sendMessage(true);
-  }
 }
 
 

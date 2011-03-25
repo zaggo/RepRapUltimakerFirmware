@@ -28,7 +28,6 @@ private:
 #else
   void internalTemperature(); 
 #endif
-  void validateTemperature(int t);
   
 public:
 
