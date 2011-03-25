@@ -192,7 +192,7 @@ inline bool cartesian_dda::xCanStep(long current, long target, bool dir)
 	if(dir && !digitalRead(X_MAX_PIN) )
 		return false;
 #else
-	if(!dir && digitalRead(X_MAX_PIN) )
+	if(dir && digitalRead(X_MAX_PIN) )
 		return false;
 #endif
 #endif
@@ -228,7 +228,7 @@ inline bool cartesian_dda::yCanStep(long current, long target, bool dir)
 	if(dir && !digitalRead(Y_MAX_PIN) )
 		return false;
 #else
-	if(!dir && digitalRead(Y_MAX_PIN) )
+	if(dir && digitalRead(Y_MAX_PIN) )
 		return false;
 #endif
 #endif
@@ -264,7 +264,7 @@ inline bool cartesian_dda::zCanStep(long current, long target, bool dir)
 	if(dir && !digitalRead(Z_MAX_PIN) )
 		return false;
 #else
-	if(!dir && digitalRead(Z_MAX_PIN) )
+	if(dir && digitalRead(Z_MAX_PIN) )
 		return false;
 #endif
 #endif
