@@ -2,6 +2,13 @@
 #include <stdio.h>
 #include <HardwareSerial.h>
 #include <avr/pgmspace.h>
+
+#include <temperature_sensor.h>
+#include <heater.h>
+#include <toolhead.h>
+#include <arduino_toolhead.h>
+
+#include "toolhead_stepper.h"
 #include "WProgram.h"
 #include "vectors.h"
 #include "thermistor.h"
@@ -36,22 +43,56 @@ http://objects.reprap.org/wiki/Mendel_User_Manual:_RepRapGCodes
 // Sanguino v1.6 by Adrian Bowyer - implemented RS485 extruders
 // Arduino Mega v1.7 by Adrian Bowyer
 
+// equal to null if we are not waiting for a heater to reach temperature or the heater we are waiting for
+extern struct heater * waitForTemperature = NULL;
+extern int waitForAllTemperatures = 0;
 
-
-
-// Maintain a list of extruders...
-
-extruder* ex[EXTRUDER_COUNT];
-byte extruder_in_use = 0;
-
-
-#if EXTRUDER_COUNT == 2            
-static extruder ex1(EXTRUDER_1_STEP_PIN, EXTRUDER_1_DIR_PIN, EXTRUDER_1_ENABLE_PIN, EXTRUDER_1_HEATER_PIN, EXTRUDER_1_TEMPERATURE_PIN, E1_STEPS_PER_MM, THERMAL_CUTOFF);            
+#if EXTRUDER_COUNT == 2
+static struct toolhead ex1;
 #endif
 
-static extruder ex0(EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_PIN, EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF); 
+static struct toolhead ex0;
 
-static Heater *heatedBed;
+void init_extruder(struct toolhead * t, int heater_pin, int temperature_pin, int step_pin, int dir_pin, int enable_pin, int steps_per_mm, thermal_cutoff)
+{
+  init_toolhead(t);
+
+  // Stepper Config
+  t->pump_motor = pump_toolhead_extruder;
+  struct toolhead_stepper_data; m;
+  m.step_pin = step_pin;
+  m.dir_pin = dir_pin;
+  m.enable_pin = enable_pin;
+  m.speed = 0;
+  t->motor_data = &motor_data;
+
+  // Heater Config
+  struct heater h;
+  heater_init( &h, millis() );
+  t->heater = h;
+  h.heater_pins =  &heater_pin;
+  h.thermal_cutoff = THERMAL_CUTOFF;
+  h.pid_gains = {E_TEMP_PID_PGAIN, E_TEMP_PID_IGAIN, E_TEMP_PID_DGAIN};
+
+  h.init_heater_pins = init_heater_pins;
+  h.shutdown_heater_pins = shutdown_heater_pins;
+  h.write_heater_pins = write_heater_pins;
+
+  // Temperature Sensor Config
+  struct temperature_sensor s;
+  h.sensor = &s;
+  s.pins = &temperature_pin;
+  s.type = EXTRUDER_TEMPERATURE_SENSOR;
+
+  init_temperature_sensor(&s);
+  init_analog_thermal_sensor_pin(s.pins); //TODO: this sucks as a solution
+
+  s.raw_read = read_analog_thermal_sensor; //TODO MAX6755 support
+
+}
+
+
+extern heater *heatedBed;
 
 
 static hostcom talkToHost;
@@ -121,16 +162,21 @@ void setup()
   led = false;
 
   setupGcodeProcessor();
-  
-  ex[0] = &ex0;
-#if EXTRUDER_COUNT == 2  
-  ex[1] = &ex1;
-#endif  
-  extruder_in_use = 0; 
-  
+
+  // init extruders
+  init_extruder(&ex0, EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF);
+  add_toolhead(&ex0);
+
+  #if EXTRUDER_COUNT == 2
+  init_extruder(&ex1, EXTRUDER_1_HEATER_PIN, EXTRUDER_1_TEMPERATURE_PIN, EXTRUDER_1_STEP_PIN, EXTRUDER_1_DIR_PIN, EXTRUDER_1_ENABLE_PIN, E1_STEPS_PER_MM, THERMAL_CUTOFF);
+  add_toolhead(&ex1);
+  #endif
+
+  extruder_in_use = &ex0;
+
   head = 0;
   tail = 0;
-  
+
   cdda[0] = &cdda0;
   cdda[1] = &cdda1;  
   cdda[2] = &cdda2;  
@@ -191,9 +237,7 @@ void shutdown()
   digitalWrite(Z_ENABLE_PIN, !ENABLE_ON);
 
   // Stop the extruders
-  
-  for(byte i = 0; i < EXTRUDER_COUNT; i++)
-    ex[i]->shutdown();
+  shutdown_all_toolheads();
 
 // If we run the bed, turn it off.
 
@@ -213,11 +257,12 @@ void shutdown()
 }
 
 
-void handle_heater_out(Heater *h, char* name, int error_code)
+void handle_heater_out(char* name, int error_code)
 {
   talkToHost.put("reading output\n");
   // heater debugging output (if enabled)
 #ifdef DEBUG_PID
+/*
   if(h->heater_pin == DEBUG_PID)
   {
     sprintf(talkToHost.string(), "target %d, cur %d, err %d", h->target, h->instantaneous, h->pid_values[pid_p]);
@@ -229,13 +274,14 @@ void handle_heater_out(Heater *h, char* name, int error_code)
  
     talkToHost.sendMessage(true);
   }
+*/
 #endif
 
 
   // handle heater errors
   if (error_code == 0) return;
 
-  sprintf(talkToHost.string(), "error: %s %s", name, heater_error_message(h, error_code) );
+  sprintf(talkToHost.string(), "error: %s %s", name, heater_error_message(ex0, error_code) );
   talkToHost.setFatal();
   talkToHost.sendMessage(true);
 }
@@ -248,17 +294,15 @@ void manage()
 {
 //  talkToHost.put("starting manage\n");
   // manage the extruders
-  for(byte i = 0; i < EXTRUDER_COUNT; i++)
-  {
-//  talkToHost.put("starting extruder\n");
-//    handle_heater_out( ex[i]->heater, EXTRUDER_NAME, ex[i]->manage() );
-//  talkToHost.put("ending extruder\n");
-  }
+  talkToHost.put("starting extruders\n");
+  //TODO: independent error messages for each toolhead
+  handle_heater_out( EXTRUDER_NAME, pump_all_toolheads() );
+  talkToHost.put("ending extruders\n");
 
   // manage the heated bed
-//  talkToHost.put("starting heater\n");
-//  handle_heater_out( heatedBed, HEATED_BED_NAME, heater_update(heatedBed) );
-//  talkToHost.put("ending heater\n");
+  talkToHost.put("starting heater\n");
+  handle_heater_out( HEATED_BED_NAME, heater_update(heatedBed) );
+  talkToHost.put("ending heater\n");
 
   // manage the fancy lcd display
 #ifdef FANCY_LCD
@@ -275,8 +319,20 @@ void loop()
 {
   nonest = false;
   talkToHost.put("loop");
-//   manage();
-//   get_and_do_command(); 
+  manage();
+  if (waitForTemperature == NULL && waitForAllTemperatures == 0)
+  {
+    get_and_do_command(); 
+  }
+  else
+  {
+    if (waitForTemperature != NULL && waitForTemperature->at_target == 1) waitForTemperature = NULL;
+    if (waitForAllTemperatures != 0
+      && heatedBet->at_target == 1
+      && ex0->heater->at_target == 1
+      && ex1->heater->at_target = 1)
+        waitForAllTemperatures = 0;
+  }
 }
 
 //******************************************************************************************
