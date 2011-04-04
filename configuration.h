@@ -167,6 +167,10 @@
 
 #define WAIT_AT_TEMPERATURE 10
 
+// Heater timeout in milliseconds. If the heater doesn't increase the temperature within this time
+// of turning on the heater an error is thrown because the heater is probably disconnected.
+#define HEATER_TIMEOUT 15000
+
 // PID gains.  E_ = extruder, B_ = bed.  The Es are about right for a brass extruder about 8 mm 
 // in diameter and 30 mm long heated by a 6 ohm coil with a 12v supply.  The B_ values are OK
 // for the bed described here:  http://reprap.org/wiki/Mendel_heated_bed

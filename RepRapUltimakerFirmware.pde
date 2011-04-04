@@ -3,21 +3,16 @@
 #include <HardwareSerial.h>
 #include <avr/pgmspace.h>
 
-#include <temperature_sensor.h>
-#include <heater.h>
 #include <toolhead.h>
 #include <arduino_toolhead.h>
 
 #include "toolhead_stepper.h"
 #include "WProgram.h"
 #include "vectors.h"
-#include "thermistor.h"
-#include "heater.h" 
 #include "configuration.h"
 #include "hostcom.h"
 #include "intercom.h"
 #include "pins.h"
-#include "extruder.h"
 #include "cartesian_dda.h"
 #include "fancy.h"
 /**
@@ -53,42 +48,47 @@ static struct toolhead ex1;
 
 static struct toolhead ex0;
 
-void init_extruder(struct toolhead * t, int heater_pin, int temperature_pin, int step_pin, int dir_pin, int enable_pin, int steps_per_mm, thermal_cutoff)
+struct toolhead * init_extruder(int heater_pin, int temperature_pin, int step_pin, int dir_pin, int enable_pin, int steps_per_mm, thermal_cutoff)
 {
+  struct toolhead * t = malloc(struct toolhead);
   init_toolhead(t);
 
   // Stepper Config
   t->pump_motor = pump_toolhead_extruder;
-  struct toolhead_stepper_data; m;
-  m.step_pin = step_pin;
-  m.dir_pin = dir_pin;
-  m.enable_pin = enable_pin;
-  m.speed = 0;
-  t->motor_data = &motor_data;
+  struct toolhead_stepper_data * m = malloc(sizeof(struct toolhead_stepper_data));
+  m->step_pin = step_pin;
+  m->dir_pin = dir_pin;
+  m->enable_pin = enable_pin;
+  m->speed = 0;
+  t->motor_data = m;
 
   // Heater Config
-  struct heater h;
-  heater_init( &h, millis() );
+  struct heater * h = malloc(sizeof(struct heater));
+  heater_init( h, millis() );
   t->heater = h;
-  h.heater_pins =  &heater_pin;
-  h.thermal_cutoff = THERMAL_CUTOFF;
-  h.pid_gains = {E_TEMP_PID_PGAIN, E_TEMP_PID_IGAIN, E_TEMP_PID_DGAIN};
+	h->heater_timeout = HEATER_TIMEOUT;
+  h->heater_pins = maloc(sizeof(int));
+  *(h->heater_pins) = heater_pin;
+  h->thermal_cutoff = THERMAL_CUTOFF;
+  h->pid_gains = {E_TEMP_PID_PGAIN, E_TEMP_PID_IGAIN, E_TEMP_PID_DGAIN};
 
-  h.init_heater_pins = init_heater_pins;
-  h.shutdown_heater_pins = shutdown_heater_pins;
-  h.write_heater_pins = write_heater_pins;
+  h->init_heater_pins = init_heater_pins;
+  h->shutdown_heater_pins = shutdown_heater_pins;
+  h->write_heater_pins = write_heater_pins;
 
   // Temperature Sensor Config
-  struct temperature_sensor s;
-  h.sensor = &s;
-  s.pins = &temperature_pin;
-  s.type = EXTRUDER_TEMPERATURE_SENSOR;
+  struct temperature_sensor * s = malloc(sizeof(struct temperature_sensor));
+  h->sensor = s;
+  s->pins = malloc(sizeof(int));
+  *(s->pins) = temperature_pin;
+  s->type = EXTRUDER_TEMPERATURE_SENSOR;
 
-  init_temperature_sensor(&s);
-  init_analog_thermal_sensor_pin(s.pins); //TODO: this sucks as a solution
+  init_temperature_sensor(s);
+  init_analog_thermal_sensor_pin(s->pins); //TODO: this sucks as a solution
 
-  s.raw_read = read_analog_thermal_sensor; //TODO MAX6755 support
+  s->raw_read = read_analog_thermal_sensor; //TODO MAX6755 support
 
+  return t;
 }
 
 
@@ -164,11 +164,11 @@ void setup()
   setupGcodeProcessor();
 
   // init extruders
-  init_extruder(&ex0, EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF);
+  ex0 = init_extruder(EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF);
   add_toolhead(&ex0);
 
   #if EXTRUDER_COUNT == 2
-  init_extruder(&ex1, EXTRUDER_1_HEATER_PIN, EXTRUDER_1_TEMPERATURE_PIN, EXTRUDER_1_STEP_PIN, EXTRUDER_1_DIR_PIN, EXTRUDER_1_ENABLE_PIN, E1_STEPS_PER_MM, THERMAL_CUTOFF);
+  ex1 = init_extruder(EXTRUDER_1_HEATER_PIN, EXTRUDER_1_TEMPERATURE_PIN, EXTRUDER_1_STEP_PIN, EXTRUDER_1_DIR_PIN, EXTRUDER_1_ENABLE_PIN, E1_STEPS_PER_MM, THERMAL_CUTOFF);
   add_toolhead(&ex1);
   #endif
 
@@ -190,21 +190,34 @@ void setup()
   init_process_string();
   
   talkToHost.start();
-  
-	// Heated Bed Heater
-	heater_init(heatedBed);
-	heatedBed->heater_pin = BED_HEATER_PIN;
 
-	heatedBed->pid_gains[pid_p] = B_TEMP_PID_PGAIN;
-	heatedBed->pid_gains[pid_i] = B_TEMP_PID_IGAIN;
-	heatedBed->pid_gains[pid_d] = B_TEMP_PID_DGAIN;
-		
-	// Heated Bed Temperature Sensor
-	heatedBed->sensor_pin = BED_TEMPERATURE_PIN;
-	heatedBed->sensor = BED_TEMPERATURE_SENSOR;
-	heatedBed->thermal_cutoff = BED_THERMAL_CUTOFF;
-	heatedBed->thermister_temp_table = bed_temp_table;
-//temptable
+  // Heated Bed Heater
+  headedBed = malloc(sizeof(struct heater));
+  heater_init(heatedBed, millis());
+
+  heatedBed->heater_timeout = HEATER_TIMEOUT;
+  bed_sensor->thermal_cutoff = BED_THERMAL_CUTOFF;
+  heatedBed->heater_pins = malloc(sizeof(int));
+  *(heatedBed->heater_pins) = BED_HEATER_PIN;
+
+  heatedBed->pid_gains[pid_p] = B_TEMP_PID_PGAIN;
+  heatedBed->pid_gains[pid_i] = B_TEMP_PID_IGAIN;
+  heatedBed->pid_gains[pid_d] = B_TEMP_PID_DGAIN;
+
+  // Heated Bed Temperature Sensor
+  struct Temperature_Sensor * bed_sensor = malloc(sizeof(struct Temperature_Sensor));
+  init_temperature_sensor(bed_sensor);
+
+  s->raw_read = read_analog_thermal_sensor; //TODO MAX6755 support
+
+  heatedBed->sensor = bed_sensor;
+
+  bed_sensor->pins = malloc(sizeof(int));
+  *(bed_sensor->pins) = BED_TEMPERATURE_PIN;
+	bed_sensor->type = BED_TEMPERATURE_SENSOR;
+
+  init_analog_thermal_sensor_pin(bed_sensor->pins); //TODO: this sucks as a solution
+  bed_sensor->raw_read = read_analog_thermal_sensor; //TODO MAX6755 support
 
 
   setTimer(DEFAULT_TICK);
@@ -257,7 +270,7 @@ void shutdown()
 }
 
 
-void handle_heater_out(char* name, int error_code)
+void handle_heater_out(char* name, sensor, int error_code)
 {
   talkToHost.put("reading output\n");
   // heater debugging output (if enabled)
@@ -281,7 +294,7 @@ void handle_heater_out(char* name, int error_code)
   // handle heater errors
   if (error_code == 0) return;
 
-  sprintf(talkToHost.string(), "error: %s %s", name, heater_error_message(ex0, error_code) );
+  sprintf(talkToHost.string(), "error: %s %s", name, heater_error_message(sensor, error_code) );
   talkToHost.setFatal();
   talkToHost.sendMessage(true);
 }
@@ -296,12 +309,12 @@ void manage()
   // manage the extruders
   talkToHost.put("starting extruders\n");
   //TODO: independent error messages for each toolhead
-  handle_heater_out( EXTRUDER_NAME, pump_all_toolheads() );
+  handle_heater_out( EXTRUDER_NAME, ex0->heater->sensor, pump_all_toolheads() );
   talkToHost.put("ending extruders\n");
 
   // manage the heated bed
   talkToHost.put("starting heater\n");
-  handle_heater_out( HEATED_BED_NAME, heater_update(heatedBed) );
+  handle_heater_out( HEATED_BED_NAME, heatedBed->sensor, heater_pump(heatedBed) );
   talkToHost.put("ending heater\n");
 
   // manage the fancy lcd display
@@ -322,7 +335,7 @@ void loop()
   manage();
   if (waitForTemperature == NULL && waitForAllTemperatures == 0)
   {
-    get_and_do_command(); 
+    get_and_do_command();
   }
   else
   {
