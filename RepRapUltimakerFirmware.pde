@@ -70,7 +70,7 @@ struct toolhead * init_extruder(int heater_pin, int temperature_pin, int step_pi
   heater_init( h, millis() );
   t->heater = h;
 	h->heater_timeout = HEATER_TIMEOUT;
-  h->heater_pins = maloc(sizeof(int));
+  h->heater_pins = malloc(sizeof(int));
   *(h->heater_pins) = heater_pin;
   h->thermal_cutoff = THERMAL_CUTOFF;
   h->pid_gains = {E_TEMP_PID_PGAIN, E_TEMP_PID_IGAIN, E_TEMP_PID_DGAIN};
