@@ -523,7 +523,7 @@ void process_string(char instruction[], int size) {
 
                 //custom code for temperature reading
             case 105:
-                float temperature = 0;
+                float temperature = 0.0;
                 if (extruder_in_use == NULL || extruder_in_use->heater == NULL) {
                     temperature = 0.0;
                 } else
