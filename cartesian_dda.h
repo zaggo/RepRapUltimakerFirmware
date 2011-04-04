@@ -151,7 +151,7 @@ inline void cartesian_dda::do_z_step()
 
 inline void cartesian_dda::do_e_step()
 {
-  if(extruder_in_use != NULL) step_toolhead_stepper(extruder_in_use);
+  if(extruder_in_use != NULL) step_toolhead_stepper(extruder_in_use->motor_data);
 }
 
 inline long cartesian_dda::calculate_feedrate_delay(const float& feedrate)

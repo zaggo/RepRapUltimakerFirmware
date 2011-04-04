@@ -1,6 +1,8 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
+#define ARDUINO
+
 /*
  *  This is the configuration file for the RepRap Motherboard microcontroller.
  *  Set values in it to match your RepRap machine.

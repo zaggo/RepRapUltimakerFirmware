@@ -3,13 +3,16 @@
 #include <HardwareSerial.h>
 #include <avr/pgmspace.h>
 
-#include <toolhead.h>
-#include <arduino_toolhead.h>
-
-#include "toolhead_stepper.h"
 #include "WProgram.h"
 #include "vectors.h"
 #include "configuration.h"
+
+extern "C" {
+  #include <toolhead.h>
+  #include <hardware/arduino_toolhead.h>
+}
+
+#include "toolhead_stepper.h"
 #include "hostcom.h"
 #include "intercom.h"
 #include "pins.h"
@@ -48,7 +51,7 @@ static struct toolhead ex1;
 
 static struct toolhead ex0;
 
-struct toolhead * init_extruder(int heater_pin, int temperature_pin, int step_pin, int dir_pin, int enable_pin, int steps_per_mm, thermal_cutoff)
+struct toolhead * init_extruder(int heater_pin, int temperature_pin, int step_pin, int dir_pin, int enable_pin, int steps_per_mm, int thermal_cutoff)
 {
   struct toolhead * t = malloc(struct toolhead);
   init_toolhead(t);
@@ -270,7 +273,7 @@ void shutdown()
 }
 
 
-void handle_heater_out(char* name, sensor, int error_code)
+void handle_heater_out(char* name, struct Temperature_Sensor sensor, int error_code)
 {
   talkToHost.put("reading output\n");
   // heater debugging output (if enabled)
