@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 extern "C" {
   #include <toolhead.h>
   #include <hardware/arduino_toolhead.h>

@@ -12,7 +12,6 @@ RM := rm -rf
 -include src/subdir.mk
 -include lib/arduino/subdir.mk
 -include lib/WiringSerial/subdir.mk
--include excluded/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)

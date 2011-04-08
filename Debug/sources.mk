@@ -32,5 +32,4 @@ SUBDIRS := \
 src \
 lib/arduino \
 lib/WiringSerial \
-excluded \
 

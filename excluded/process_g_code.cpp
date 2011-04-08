@@ -11,11 +11,6 @@ http://objects.reprap.org/wiki/Mendel_User_Manual:_RepRapGCodes
 
  */
 
-extern "C" {
-  #include <toolhead.h>
-  #include <hardware/arduino_toolhead.h>
-}
-
 #include "firmware.h"
 
 #include <string.h>

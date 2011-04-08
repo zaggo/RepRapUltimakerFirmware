@@ -8,7 +8,6 @@ CPP_SRCS += \
 ../src/fancy.cpp \
 ../src/firmware.cpp \
 ../src/main.cpp \
-../src/process_g_code.cpp \
 ../src/toolhead_stepper.cpp \
 ../src/vectors.cpp 
 
@@ -17,7 +16,6 @@ OBJS += \
 ./src/fancy.o \
 ./src/firmware.o \
 ./src/main.o \
-./src/process_g_code.o \
 ./src/toolhead_stepper.o \
 ./src/vectors.o 
 
@@ -26,7 +24,6 @@ CPP_DEPS += \
 ./src/fancy.d \
 ./src/firmware.d \
 ./src/main.d \
-./src/process_g_code.d \
 ./src/toolhead_stepper.d \
 ./src/vectors.d 
 
@@ -35,7 +32,7 @@ CPP_DEPS += \
 src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: AVR C++ Compiler'
-	avr-g++ -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -fno-exceptions -mmcu=atmega1280 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o"$@" "$<"
+	avr-g++ -I"/home/rob/workspaces/ultimaker-hacker-workspace/RepRapUltimakerFirmware/lib/arduino" -I"/home/rob/workspaces/ultimaker-hacker-workspace/toolhead-lib/lib/wiring" -I"/home/rob/workspaces/ultimaker-hacker-workspace/toolhead-lib/src" -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -fno-exceptions -mmcu=atmega1280 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

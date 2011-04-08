@@ -8,6 +8,11 @@
 #ifndef REPRAPULTIMAKERFIRMWARE_H_
 #define REPRAPULTIMAKERFIRMWARE_H_
 
+extern "C" {
+  #include <toolhead.h>
+  #include <hardware/arduino_toolhead.h>
+}
+
 #include "vectors.h"
 #include "configuration.h"
 #include "pins.h"
@@ -17,11 +22,15 @@
 //#include "intercom.h" TODO: remove?
 #include "cartesian_dda.h"
 #include "fancy.h"
-#include "process_g_code.h"
+//TODO:readd#include "process_g_code.h"
 
 //TODO:readdstatic hostcom talkToHost;
 
 #include <WProgram.h>
+
+void loop();
+void setup();
+void shutdown();
 
 
 void setTimer(long delay);
