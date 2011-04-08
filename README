@@ -12,7 +12,7 @@
 This Ultimaker firmware is based on the RepRap FiveD firmware and will be updated with RepRap commits. As well, it will be maintained by Erik de Bruijn and Rob Gilson with an emphasis on supporting multiple Host software's. It should already work well with the Java host, but I've added ReplicatorG drivers, etc.
 
 For a nice, compatible ReplicatorG version, see this github page:
-http://github.com/ErikDeBruijn/ReplicatorG-Erik5D
+http://github.com/Ultimaker/ReplicatorG
 
 Supported Platforms
 ====================
