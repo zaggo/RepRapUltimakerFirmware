@@ -12,6 +12,11 @@ extern "C" {
   #include <hardware/arduino_toolhead.h>
 }
 
+void loop();
+void setup();
+void shutdown();
+
+
 /**
 
 RepRap GCode interpreter.

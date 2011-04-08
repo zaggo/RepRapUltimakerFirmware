@@ -23,6 +23,7 @@
 */
 
 //#include "wiring_private.h"
+#include "../arduino_1280.h"
 #include <math.h>
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>

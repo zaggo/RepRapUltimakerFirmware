@@ -1,6 +1,6 @@
 #include <WProgram.h>
 
-int main(void)
+int main()
 {
 	init();
 

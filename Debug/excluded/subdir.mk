@@ -4,20 +4,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-/home/rob/Documents/replicators/arduino-ultimaker-git/libraries/Wire/Wire.cpp 
+../excluded/hostcom.cpp \
+../excluded/intercom.cpp 
 
 OBJS += \
-./lib/Wire/Wire.o 
+./excluded/hostcom.o \
+./excluded/intercom.o 
 
 CPP_DEPS += \
-./lib/Wire/Wire.d 
+./excluded/hostcom.d \
+./excluded/intercom.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-lib/Wire/Wire.o: /home/rob/Documents/replicators/arduino-ultimaker-git/libraries/Wire/Wire.cpp
+excluded/%.o: ../excluded/%.cpp
 	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Invoking: AVR C++ Compiler'
+	avr-g++ -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -fno-exceptions -mmcu=atmega1280 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

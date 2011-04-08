@@ -4,60 +4,38 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-/home/rob/sketchbook/RepRapUltimakerFirmware/cartesian_dda.cpp \
-/home/rob/sketchbook/RepRapUltimakerFirmware/fancy.cpp \
-/home/rob/sketchbook/RepRapUltimakerFirmware/intercom.cpp \
-/home/rob/sketchbook/RepRapUltimakerFirmware/process_g_code.cpp \
-/home/rob/sketchbook/RepRapUltimakerFirmware/toolhead_stepper.cpp 
+../src/cartesian_dda.cpp \
+../src/fancy.cpp \
+../src/firmware.cpp \
+../src/main.cpp \
+../src/process_g_code.cpp \
+../src/toolhead_stepper.cpp \
+../src/vectors.cpp 
 
 OBJS += \
 ./src/cartesian_dda.o \
 ./src/fancy.o \
-./src/intercom.o \
+./src/firmware.o \
+./src/main.o \
 ./src/process_g_code.o \
-./src/toolhead_stepper.o 
+./src/toolhead_stepper.o \
+./src/vectors.o 
 
 CPP_DEPS += \
 ./src/cartesian_dda.d \
 ./src/fancy.d \
-./src/intercom.d \
+./src/firmware.d \
+./src/main.d \
 ./src/process_g_code.d \
-./src/toolhead_stepper.d 
+./src/toolhead_stepper.d \
+./src/vectors.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-src/cartesian_dda.o: /home/rob/sketchbook/RepRapUltimakerFirmware/cartesian_dda.cpp
+src/%.o: ../src/%.cpp
 	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I"/libraries/" -O0 -g3 -Wall -c -fmessage-length=0 -std=c99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-src/fancy.o: /home/rob/sketchbook/RepRapUltimakerFirmware/fancy.cpp
-	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I"/libraries/" -O0 -g3 -Wall -c -fmessage-length=0 -std=c99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-src/intercom.o: /home/rob/sketchbook/RepRapUltimakerFirmware/intercom.cpp
-	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I"/libraries/" -O0 -g3 -Wall -c -fmessage-length=0 -std=c99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-src/process_g_code.o: /home/rob/sketchbook/RepRapUltimakerFirmware/process_g_code.cpp
-	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I"/libraries/" -O0 -g3 -Wall -c -fmessage-length=0 -std=c99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-src/toolhead_stepper.o: /home/rob/sketchbook/RepRapUltimakerFirmware/toolhead_stepper.cpp
-	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C++ Compiler'
-	g++ -I"/libraries/" -O0 -g3 -Wall -c -fmessage-length=0 -std=c99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo 'Invoking: AVR C++ Compiler'
+	avr-g++ -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -funsigned-char -funsigned-bitfields -fno-exceptions -mmcu=atmega1280 -DF_CPU=16000000UL -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -c -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
