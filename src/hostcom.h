@@ -46,8 +46,6 @@
 
 #define NO_TEMP -300
 
-extern void shutdown();
-
 class hostcom
 {
 public:

@@ -5,6 +5,9 @@ extern "C" {
 
 #include "firmware.h"
 
+extern struct toolhead * extruder_in_use = 0;
+
+
 int pump_toolhead_extruder(void * md, unsigned long time)
 {
   //struct toolhead_stepper_data * motor_data = ( (struct toolhead_stepper_data *) md );

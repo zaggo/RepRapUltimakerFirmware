@@ -1,7 +1,7 @@
 #ifndef TOOLHEAD_STEPPER_H
 #define TOOLHEAD_STEPPER_H
 
-extern struct toolhead * extruder_in_use = 0;
+extern struct toolhead * extruder_in_use;
 
 struct toolhead_stepper_data
 {

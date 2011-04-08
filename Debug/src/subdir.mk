@@ -7,7 +7,9 @@ CPP_SRCS += \
 ../src/cartesian_dda.cpp \
 ../src/fancy.cpp \
 ../src/firmware.cpp \
+../src/hostcom.cpp \
 ../src/main.cpp \
+../src/process_g_code.cpp \
 ../src/toolhead_stepper.cpp \
 ../src/vectors.cpp 
 
@@ -15,7 +17,9 @@ OBJS += \
 ./src/cartesian_dda.o \
 ./src/fancy.o \
 ./src/firmware.o \
+./src/hostcom.o \
 ./src/main.o \
+./src/process_g_code.o \
 ./src/toolhead_stepper.o \
 ./src/vectors.o 
 
@@ -23,7 +27,9 @@ CPP_DEPS += \
 ./src/cartesian_dda.d \
 ./src/fancy.d \
 ./src/firmware.d \
+./src/hostcom.d \
 ./src/main.d \
+./src/process_g_code.d \
 ./src/toolhead_stepper.d \
 ./src/vectors.d 
 

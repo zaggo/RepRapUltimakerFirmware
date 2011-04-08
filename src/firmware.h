@@ -18,13 +18,13 @@ extern "C" {
 #include "pins.h"
 
 #include "toolhead_stepper.h"
-//TODO:readd#include "hostcom.h"
+#include "hostcom.h"
 //#include "intercom.h" TODO: remove?
 #include "cartesian_dda.h"
 #include "fancy.h"
-//TODO:readd#include "process_g_code.h"
+#include "process_g_code.h"
 
-//TODO:readdstatic hostcom talkToHost;
+static hostcom talkToHost;
 
 #include <WProgram.h>
 
@@ -52,6 +52,12 @@ inline void resetTimer();
 void setupTimerInterrupt();
 
 void setTimerResolution(byte r);
+
+inline void qMove(const FloatPoint& p);
+inline bool qEmpty();
+inline void dQMove();
+inline void setUnits(bool u);
+inline void setPosition(const FloatPoint& p);
 
 
 // equal to null if we are not waiting for a heater to reach temperature or the heater we are waiting for

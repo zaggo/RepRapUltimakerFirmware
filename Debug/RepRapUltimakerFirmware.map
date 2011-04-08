@@ -13,9 +13,9 @@ Archive member included because of file (symbol)
 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
                               ./src/cartesian_dda.o (__do_clear_bss)
 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
-                              ./src/firmware.o (__do_global_ctors)
+                              ./src/cartesian_dda.o (__do_global_ctors)
 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
-                              ./lib/arduino/Print.o (__fixunssfsi)
+                              ./src/process_g_code.o (__fixunssfsi)
 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
                               ./src/cartesian_dda.o (__subsf3)
 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
@@ -76,6 +76,10 @@ Archive member included because of file (symbol)
                               ./lib/arduino/WMath.o (random)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
                               ./lib/arduino/WString.o (realloc)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+                              ./src/process_g_code.o (strtod)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+                              ./src/process_g_code.o (strtol)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
                               ./lib/arduino/WString.o (atol)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
@@ -84,6 +88,8 @@ Archive member included because of file (symbol)
                               ./lib/arduino/WString.o (tolower)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
                               ./lib/arduino/WString.o (toupper)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncasecmp_P.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o) (strncasecmp_P)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
                               /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o) (memcpy)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
@@ -112,14 +118,33 @@ Archive member included because of file (symbol)
                               /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o) (__mulsi_const_10)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
                               ./lib/arduino/WString.o (ultoa)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
+                              ./src/firmware.o (sprintf)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o) (__eqsf2)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fp_cmp.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o) (__fp_cmp)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o) (vfprintf)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o) (errno)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
                               /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o) (__ctype_isfalse)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen_P.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o) (strnlen_P)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o) (strnlen)
 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
                               /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o) (strrev)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fputc.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o) (fputc)
+/usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa_invert.o)
+                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o) (__ultoa_invert)
 
 Allocating common symbols
 Common symbol       size              file
 
+errno               0x2               /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
 __brkval            0x2               /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
 __flp               0x2               /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
 
@@ -141,7 +166,9 @@ LOAD /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
 LOAD ./src/cartesian_dda.o
 LOAD ./src/fancy.o
 LOAD ./src/firmware.o
+LOAD ./src/hostcom.o
 LOAD ./src/main.o
+LOAD ./src/process_g_code.o
 LOAD ./src/toolhead_stepper.o
 LOAD ./src/vectors.o
 LOAD ./lib/arduino/HardwareSerial.o
@@ -253,7 +280,7 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0xaa74
+.text           0x00000000     0xd89e
  *(.vectors)
  .vectors       0x00000000       0xe4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
                 0x00000000                __vectors
@@ -269,513 +296,587 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
                 0x00000133                digital_pin_to_port_PGM
                 0x00000179                digital_pin_to_bit_mask_PGM
                 0x000001bf                digital_pin_to_timer_PGM
-                0x00000206                . = ALIGN (0x2)
- *fill*         0x00000205        0x1 00
-                0x00000206                __trampolines_start = .
+ .progmem.data  0x00000205       0x3b /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+                0x00000240                . = ALIGN (0x2)
+                0x00000240                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x00000206        0x0 linker stubs
+ .trampolines   0x00000240        0x0 linker stubs
  *(.trampolines*)
-                0x00000206                __trampolines_end = .
+                0x00000240                __trampolines_end = .
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000206                __ctors_start = .
+                0x00000240                __ctors_start = .
  *(.ctors)
- .ctors         0x00000206        0x2 ./src/firmware.o
- .ctors         0x00000208        0x2 ./lib/arduino/HardwareSerial.o
-                0x0000020a                __ctors_end = .
-                0x0000020a                __dtors_start = .
+ .ctors         0x00000240        0x2 ./src/cartesian_dda.o
+ .ctors         0x00000242        0x2 ./src/fancy.o
+ .ctors         0x00000244        0x2 ./src/firmware.o
+ .ctors         0x00000246        0x2 ./src/hostcom.o
+ .ctors         0x00000248        0x2 ./src/process_g_code.o
+ .ctors         0x0000024a        0x2 ./src/toolhead_stepper.o
+ .ctors         0x0000024c        0x2 ./src/vectors.o
+ .ctors         0x0000024e        0x2 ./lib/arduino/HardwareSerial.o
+                0x00000250                __ctors_end = .
+                0x00000250                __dtors_start = .
  *(.dtors)
-                0x0000020a                __dtors_end = .
+                0x00000250                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x0000020a        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
-                0x0000020a                __init
+ .init0         0x00000250        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
+                0x00000250                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x0000020a        0xc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
+ .init2         0x00000250        0xc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000216       0x1a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
-                0x00000216                __do_copy_data
- .init4         0x00000230       0x10 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
-                0x00000230                __do_clear_bss
+ .init4         0x0000025c       0x1a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
+                0x0000025c                __do_copy_data
+ .init4         0x00000276       0x10 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+                0x00000276                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
  *(.init6)
- .init6         0x00000240       0x16 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
-                0x00000240                __do_global_ctors
+ .init6         0x00000286       0x16 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
+                0x00000286                __do_global_ctors
  *(.init6)
  *(.init7)
  *(.init7)
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000256        0x8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
+ .init9         0x0000029c        0x8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
  *(.init9)
  *(.text)
- .text          0x0000025e        0x4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
-                0x0000025e                __vector_38
-                0x0000025e                __vector_22
-                0x0000025e                __vector_28
-                0x0000025e                __vector_32
-                0x0000025e                __vector_34
-                0x0000025e                __vector_24
-                0x0000025e                __vector_12
-                0x0000025e                __vector_55
-                0x0000025e                __vector_46
-                0x0000025e                __bad_interrupt
-                0x0000025e                __vector_31
-                0x0000025e                __vector_35
-                0x0000025e                __vector_39
-                0x0000025e                __vector_30
-                0x0000025e                __vector_45
-                0x0000025e                __vector_11
-                0x0000025e                __vector_19
-                0x0000025e                __vector_56
-                0x0000025e                __vector_49
-                0x0000025e                __vector_41
-                0x0000025e                __vector_43
-                0x0000025e                __vector_27
-                0x0000025e                __vector_33
-                0x0000025e                __vector_47
-                0x0000025e                __vector_52
-                0x0000025e                __vector_37
-                0x0000025e                __vector_44
-                0x0000025e                __vector_9
-                0x0000025e                __vector_21
-                0x0000025e                __vector_15
-                0x0000025e                __vector_29
-                0x0000025e                __vector_40
-                0x0000025e                __vector_26
-                0x0000025e                __vector_48
-                0x0000025e                __vector_14
-                0x0000025e                __vector_53
-                0x0000025e                __vector_10
-                0x0000025e                __vector_50
-                0x0000025e                __vector_16
-                0x0000025e                __vector_18
-                0x0000025e                __vector_20
-                0x0000025e                __vector_42
- .text          0x00000262     0x22c4 ./src/cartesian_dda.o
-                0x00000262                cartesian_dda::calculate_feedrate_delay(float const&)
-                0x00000466                cartesian_dda::eCanStep(long, long, bool)
-                0x000004d0                cartesian_dda::fCanStep(long, long, bool)
-                0x0000053a                cartesian_dda::do_x_step()
-                0x00000562                cartesian_dda::do_y_step()
-                0x0000058a                cartesian_dda::do_z_step()
-                0x000005b2                cartesian_dda::disable_steppers()
-                0x000005e2                cartesian_dda::shutdown()
-                0x0000061a                cartesian_dda::enable_steppers()
-                0x000006c2                cartesian_dda::dda_start()
-                0x000007a6                cartesian_dda::xCanStep(long, long, bool)
-                0x00000862                cartesian_dda::yCanStep(long, long, bool)
-                0x0000091e                cartesian_dda::zCanStep(long, long, bool)
-                0x000009da                cartesian_dda::do_e_step()
-                0x00000a0e                cartesian_dda::dda_step()
-                0x00001392                cartesian_dda::set_target(FloatPoint const&)
-                0x00002108                cartesian_dda::set_units()
-                0x00002230                cartesian_dda::set_units(bool)
-                0x0000225e                cartesian_dda::cartesian_dda()
-                0x000023c2                cartesian_dda::cartesian_dda()
- .text          0x00002526        0x0 ./src/fancy.o
- .text          0x00002526      0xcd4 ./src/firmware.o
-                0x00002526                handle_heater_out(char*, temperature_sensor*, int)
-                0x00002552                setTimerResolution(unsigned char)
-                0x00002658                getTimerCeiling(long const&)
-                0x000027b8                getTimerResolution(long const&)
-                0x00002882                delayMicrosecondsInterruptible(unsigned int)
-                0x000028e2                enableTimerInterrupt()
-                0x000028fe                disableTimerInterrupt()
-                0x0000291a                setTimerCeiling(unsigned int)
-                0x0000293e                setupTimerInterrupt()
-                0x000029e2                setTimer(long)
-                0x00002abe                blink()
-                0x00002af2                manage()
-                0x00002b82                loop
-                0x00002c0e                cancelAndClearQueue()
-                0x00002c5a                shutdown()
-                0x00002c9a                __vector_17
-                0x00002d6e                init_extruder(int, int, int, int, int, int, int)
-                0x00002f60                setup
- .text          0x000031fa       0x16 ./src/main.o
-                0x000031fa                main
- .text          0x00003210      0x224 ./src/toolhead_stepper.o
-                0x00003210                pump_toolhead_extruder(void*, unsigned long)
-                0x00003242                toolhead_stepper_data(toolhead*)
-                0x00003262                set_toolhead_steper_speed(toolhead*, int)
-                0x000032a2                set_toolhead_steper_steps_per_mm(toolhead*, int)
-                0x000032e2                set_toolhead_steper_enable(toolhead*, int)
-                0x00003326                set_toolhead_stepper_direction(toolhead*, int)
-                0x0000336a                step_toolhead_stepper(toolhead_stepper_data*)
-                0x000033d0                init_toolhead_stepper(toolhead_stepper_data*)
- .text          0x00003434        0x0 ./src/vectors.o
- .text          0x00003434      0xac8 ./lib/arduino/HardwareSerial.o
-                0x00003434                store_char(unsigned char, ring_buffer*)
-                0x000034b6                __vector_25
-                0x0000352a                __vector_36
-                0x0000359e                __vector_51
-                0x00003612                __vector_54
-                0x00003686                Print::Print()
-                0x000036aa                Stream::Stream()
-                0x000036d6                HardwareSerial::HardwareSerial(ring_buffer*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char, unsigned char, unsigned char, unsigned char, unsigned char)
-                0x000037c0                HardwareSerial::HardwareSerial(ring_buffer*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char, unsigned char, unsigned char, unsigned char, unsigned char)
-                0x000038aa                HardwareSerial::begin(unsigned long)
-                0x00003a46                HardwareSerial::end()
-                0x00003afc                HardwareSerial::available()
-                0x00003b4a                HardwareSerial::peek()
-                0x00003bca                HardwareSerial::read()
-                0x00003c7c                HardwareSerial::flush()
-                0x00003cb8                HardwareSerial::write(unsigned char)
- .text          0x00003efc      0xa7c ./lib/arduino/Print.o
-                0x00003efc                String::length() const
-                0x00003f1c                Print::write(char const*)
-                0x00003f72                Print::write(unsigned char const*, unsigned int)
-                0x00003fec                Print::print(char const*)
-                0x0000402c                Print::printNumber(unsigned long, unsigned char)
-                0x000041ba                Print::print(unsigned long, int)
-                0x0000422c                Print::print(unsigned int, int)
-                0x00004274                Print::print(unsigned char, int)
-                0x000042b8                Print::print(long, int)
-                0x00004384                Print::print(int, int)
-                0x000043d0                Print::print(char, int)
-                0x00004414                Print::println()
-                0x00004448                Print::println(unsigned long, int)
-                0x000044a0                Print::println(unsigned int, int)
-                0x000044e6                Print::println(int, int)
-                0x0000452c                Print::println(unsigned char, int)
-                0x0000456c                Print::println(char const*)
-                0x000045a4                Print::println(char, int)
-                0x000045e4                Print::println(long, int)
-                0x0000463c                Print::printFloat(double, unsigned char)
-                0x0000480c                Print::print(double, int)
-                0x0000485a                Print::println(double, int)
-                0x000048b2                Print::print(String const&)
-                0x00004940                Print::println(String const&)
- .text          0x00004978      0xd50 ./lib/arduino/Tone.o
-                0x00004f08                disableTimer(unsigned char)
-                0x00004fd0                noTone(unsigned char)
-                0x0000505c                __vector_13
-                0x00005152                tone(unsigned char, unsigned int, unsigned long)
- .text          0x000056c8      0x6e4 ./lib/arduino/WInterrupts.o
-                0x000056c8                attachInterrupt
-                0x00005900                detachInterrupt
-                0x00005a1c                __vector_1
-                0x00005a8e                __vector_2
-                0x00005b00                __vector_3
-                0x00005b72                __vector_4
-                0x00005be4                __vector_5
-                0x00005c56                __vector_6
-                0x00005cc8                __vector_7
-                0x00005d3a                __vector_8
- .text          0x00005dac      0x2aa ./lib/arduino/WMath.o
-                0x00005dac                map(long, long, long, long, long)
-                0x00005e8e                makeWord(unsigned int)
-                0x00005eaa                makeWord(unsigned char, unsigned char)
-                0x00005ed6                random(long)
-                0x00005f4e                random(long, long)
-                0x00006024                randomSeed(unsigned int)
- .text          0x00006056     0x1b34 ./lib/arduino/WString.o
-                0x00006076                String::setCharAt(unsigned int, char)
-                0x000060d2                String::operator[](unsigned int)
-                0x00006140                String::operator[](unsigned int) const
-                0x00006176                String::charAt(unsigned int) const
-                0x000061a6                String::toInt()
-                0x000061d2                String::toCharArray(char*, unsigned int)
-                0x00006264                String::getBytes(unsigned char*, unsigned int)
-                0x000062f6                String::~String()
-                0x00006332                String::startsWith(String const&, unsigned int) const
-                0x000063ba                String::startsWith(String const&) const
-                0x00006410                String::lastIndexOf(char, unsigned int) const
-                0x000064e8                String::lastIndexOf(char) const
-                0x00006520                String::indexOf(String const&, unsigned int) const
-                0x000065bc                String::indexOf(String const&) const
-                0x000065f0                String::indexOf(char, unsigned int) const
-                0x0000668c                String::indexOf(char) const
-                0x000066b8                String::equals(String const&) const
-                0x00006718                String::endsWith(String const&) const
-                0x00006796                String::operator>=(String const&) const
-                0x000067e8                String::operator<=(String const&) const
-                0x0000683c                String::operator>(String const&) const
-                0x00006890                String::operator<(String const&) const
-                0x000068e2                String::operator!=(String const&) const
-                0x0000694e                String::operator==(String const&) const
-                0x000069b2                String::compareTo(String const&) const
-                0x000069ea                String::operator+=(String const&)
-                0x00006ade                String::concat(String const&)
-                0x00006b0e                String::getBuffer(unsigned int)
-                0x00006b76                String::operator=(String const&)
-                0x00006c28                String::String(unsigned char)
-                0x00006c86                String::String(unsigned char)
-                0x00006ce4                String::String(char)
-                0x00006d42                String::String(char)
-                0x00006da0                String::String(String const&)
-                0x00006e06                String::String(String const&)
-                0x00006e6c                String::String(unsigned long, int)
-                0x00006f00                String::String(unsigned long, int)
-                0x00006f94                String::String(unsigned int, int)
-                0x00007028                String::String(unsigned int, int)
-                0x000070bc                String::String(char const*)
-                0x0000712e                String::toUpperCase() const
-                0x000071d2                String::toLowerCase() const
-                0x00007276                String::equalsIgnoreCase(String const&) const
-                0x00007322                String::substring(unsigned int, unsigned int) const
-                0x00007400                String::substring(unsigned int) const
-                0x0000744c                String::lastIndexOf(String const&, unsigned int) const
-                0x00007578                String::lastIndexOf(String const&) const
-                0x000075be                String::trim() const
-                0x000076d0                String::replace(String const&, String const&)
-                0x00007822                String::replace(char, char)
-                0x000078dc                String::String(char const*)
-                0x0000794e                String::String(long, int)
-                0x000079e4                String::String(long, int)
-                0x00007a7a                String::String(int, int)
-                0x00007b02                String::String(int, int)
- .text          0x00007b8a        0x0 ./lib/arduino/pins_arduino.o
- .text          0x00007b8a      0x41e ./lib/arduino/wiring.o
-                0x00007b8a                __vector_23
-                0x00007c6a                millis
-                0x00007cbe                micros
-                0x00007d74                delay
-                0x00007dfa                delayMicroseconds
-                0x00007e4a                init
- .text          0x00007fa8      0x3d2 ./lib/arduino/wiring_analog.o
-                0x00007fa8                analogReference
-                0x00007fc2                analogRead
-                0x00008082                analogWrite
- .text          0x0000837a      0x49e ./lib/arduino/wiring_digital.o
-                0x0000837a                pinMode
-                0x0000863c                digitalWrite
-                0x00008744                digitalRead
- .text          0x00008818      0x2a2 ./lib/arduino/wiring_pulse.o
-                0x00008818                pulseIn
- .text          0x00008aba      0x142 ./lib/arduino/wiring_shift.o
-                0x00008aba                shiftIn
-                0x00008b5a                shiftOut
- .text          0x00008bfc      0x5cc ./lib/WiringSerial/wiring_serial.o
-                0x00008bfc                beginSerial
-                0x00008cee                serialWrite
-                0x00008d1c                serialAvailable
-                0x00008d52                serialRead
-                0x00008dc6                serialFlush
-                0x00008de4                USART_RX_vect
-                0x00008e96                printByte
-                0x00008eb0                printString
-                0x00008eea                printPgmString
-                0x00008f3a                printIntegerInBase
-                0x000090b2                printInteger
-                0x0000911c                printFloat
- .text          0x000091c8        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
- .text          0x000091c8        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
- .text          0x000091c8        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
- .text          0x000091c8        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
- .text          0x000091c8        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
- .text          0x000091c8        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
- .text          0x000091c8        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
- .text          0x000091c8       0x58 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
-                0x000091c8                __fixunssfsi
- .text          0x00009220      0x354 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
-                0x000094b8                __subsf3
-                0x0000951a                __addsf3
- .text          0x00009574      0x1f4 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
-                0x00009574                __mulsf3
- .text          0x00009768      0x158 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_div_sf.o)
-                0x00009768                __divsf3
- .text          0x000098c0       0x60 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ge_sf.o)
-                0x000098c0                __gesf2
- .text          0x00009920       0x60 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
-                0x00009920                __ltsf2
- .text          0x00009980       0xbc /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
-                0x00009980                __floatsisf
- .text          0x00009a3c       0xa8 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
-                0x00009a3c                __fixsfsi
- .text          0x00009ae4        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_thenan_sf.o)
- .text          0x00009ae4       0xf2 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
-                0x00009ae4                __floatunsisf
- .text          0x00009bd6        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
- .text          0x00009bd6        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
- .text          0x00009bd6        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
- .text          0x00009bd6        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
- .text          0x00009bd6       0x9e /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clzsi2.o)
-                0x00009bd6                __clzsi2
- .text          0x00009c74      0x1aa /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_pack_sf.o)
-                0x00009c74                __pack_f
- .text          0x00009e1e       0xf0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_unpack_sf.o)
-                0x00009e1e                __unpack_f
- .text          0x00009f0e       0xb2 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fpcmp_parts_sf.o)
-                0x00009f0e                __fpcmp_parts_f
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clz.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
- .text          0x00009fc0        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
-                0x00009fc0                . = ALIGN (0x2)
+ .text          0x000002a4        0x4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
+                0x000002a4                __vector_38
+                0x000002a4                __vector_22
+                0x000002a4                __vector_28
+                0x000002a4                __vector_32
+                0x000002a4                __vector_34
+                0x000002a4                __vector_24
+                0x000002a4                __vector_12
+                0x000002a4                __vector_55
+                0x000002a4                __vector_46
+                0x000002a4                __bad_interrupt
+                0x000002a4                __vector_31
+                0x000002a4                __vector_35
+                0x000002a4                __vector_39
+                0x000002a4                __vector_30
+                0x000002a4                __vector_45
+                0x000002a4                __vector_11
+                0x000002a4                __vector_19
+                0x000002a4                __vector_56
+                0x000002a4                __vector_49
+                0x000002a4                __vector_41
+                0x000002a4                __vector_43
+                0x000002a4                __vector_27
+                0x000002a4                __vector_33
+                0x000002a4                __vector_47
+                0x000002a4                __vector_52
+                0x000002a4                __vector_37
+                0x000002a4                __vector_44
+                0x000002a4                __vector_9
+                0x000002a4                __vector_21
+                0x000002a4                __vector_15
+                0x000002a4                __vector_29
+                0x000002a4                __vector_40
+                0x000002a4                __vector_26
+                0x000002a4                __vector_48
+                0x000002a4                __vector_14
+                0x000002a4                __vector_53
+                0x000002a4                __vector_10
+                0x000002a4                __vector_50
+                0x000002a4                __vector_16
+                0x000002a4                __vector_18
+                0x000002a4                __vector_20
+                0x000002a4                __vector_42
+ .text          0x000002a8     0x231e ./src/cartesian_dda.o
+                0x000002a8                cartesian_dda::calculate_feedrate_delay(float const&)
+                0x000004ac                cartesian_dda::eCanStep(long, long, bool)
+                0x00000516                cartesian_dda::fCanStep(long, long, bool)
+                0x000005da                cartesian_dda::do_x_step()
+                0x00000602                cartesian_dda::do_y_step()
+                0x0000062a                cartesian_dda::do_z_step()
+                0x00000652                cartesian_dda::disable_steppers()
+                0x00000682                cartesian_dda::shutdown()
+                0x000006ba                cartesian_dda::enable_steppers()
+                0x00000762                cartesian_dda::dda_start()
+                0x00000846                cartesian_dda::xCanStep(long, long, bool)
+                0x00000902                cartesian_dda::yCanStep(long, long, bool)
+                0x000009be                cartesian_dda::zCanStep(long, long, bool)
+                0x00000a7a                cartesian_dda::do_e_step()
+                0x00000aae                cartesian_dda::dda_step()
+                0x00001432                cartesian_dda::set_target(FloatPoint const&)
+                0x000021a8                cartesian_dda::set_units()
+                0x000022d0                cartesian_dda::set_units(bool)
+                0x000022fe                cartesian_dda::cartesian_dda()
+                0x00002462                cartesian_dda::cartesian_dda()
+ .text          0x000025c6       0x5a ./src/fancy.o
+ .text          0x00002620      0xe80 ./src/firmware.o
+                0x00002620                setTimerResolution(unsigned char)
+                0x00002726                getTimerCeiling(long const&)
+                0x00002886                getTimerResolution(long const&)
+                0x00002950                delayMicrosecondsInterruptible(unsigned int)
+                0x000029b0                enableTimerInterrupt()
+                0x000029cc                disableTimerInterrupt()
+                0x000029e8                setTimerCeiling(unsigned int)
+                0x00002a0c                setupTimerInterrupt()
+                0x00002ab0                setTimer(long)
+                0x00002b94                blink()
+                0x00002bc8                handle_heater_out(char*, temperature_sensor*, int)
+                0x00002c80                manage()
+                0x00002d56                loop
+                0x00002df6                cancelAndClearQueue()
+                0x00002e42                shutdown()
+                0x00002e82                qEmpty()
+                0x00002ed2                dQMove()
+                0x00002f1e                __vector_17
+                0x00002ff6                init_extruder(int, int, int, int, int, int, int)
+                0x000031e8                setup
+ .text          0x000034a0       0xee ./src/hostcom.o
+                0x000034a0                hostcom::reset()
+                0x00003508                hostcom::hostcom()
+ .text          0x0000358e       0x16 ./src/main.o
+                0x0000358e                main
+ .text          0x000035a4     0x1e7a ./src/process_g_code.o
+                0x000035a4                init_process_string()
+                0x000035ba                setupGcodeProcessor()
+                0x0000363a                scan_long(char*, long*, unsigned int*, unsigned int)
+                0x000036ee                scan_int(char*, int*, unsigned int*, unsigned int)
+                0x00003792                scan_float(char*, float*, unsigned int*, unsigned int)
+                0x0000384a                parse_string(GcodeParser*, char*, int)
+                0x00003cf4                specialMoveZ(float const&, float const&)
+                0x00003da2                zeroZ()
+                0x00003f58                specialMoveY(float const&, float const&)
+                0x00004006                zeroY()
+                0x000041a4                specialMoveX(float const&, float const&)
+                0x00004252                zeroX()
+                0x00004408                process_string(char*, int)
+                0x000052ae                get_and_do_command()
+ .text          0x0000541e      0x27e ./src/toolhead_stepper.o
+                0x0000541e                pump_toolhead_extruder(void*, unsigned long)
+                0x00005450                toolhead_stepper_data(toolhead*)
+                0x00005470                set_toolhead_steper_speed(toolhead*, int)
+                0x000054b0                set_toolhead_steper_steps_per_mm(toolhead*, int)
+                0x0000554a                set_toolhead_steper_enable(toolhead*, int)
+                0x0000558e                set_toolhead_stepper_direction(toolhead*, int)
+                0x000055d2                step_toolhead_stepper(toolhead_stepper_data*)
+                0x00005638                init_toolhead_stepper(toolhead_stepper_data*)
+ .text          0x0000569c       0x5a ./src/vectors.o
+ .text          0x000056f6      0xac8 ./lib/arduino/HardwareSerial.o
+                0x000056f6                store_char(unsigned char, ring_buffer*)
+                0x00005778                __vector_25
+                0x000057ec                __vector_36
+                0x00005860                __vector_51
+                0x000058d4                __vector_54
+                0x00005948                Print::Print()
+                0x0000596c                Stream::Stream()
+                0x00005998                HardwareSerial::HardwareSerial(ring_buffer*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char, unsigned char, unsigned char, unsigned char, unsigned char)
+                0x00005a82                HardwareSerial::HardwareSerial(ring_buffer*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char volatile*, unsigned char, unsigned char, unsigned char, unsigned char, unsigned char)
+                0x00005b6c                HardwareSerial::begin(unsigned long)
+                0x00005d08                HardwareSerial::end()
+                0x00005dbe                HardwareSerial::available()
+                0x00005e0c                HardwareSerial::peek()
+                0x00005e8c                HardwareSerial::read()
+                0x00005f3e                HardwareSerial::flush()
+                0x00005f7a                HardwareSerial::write(unsigned char)
+ .text          0x000061be      0xa7c ./lib/arduino/Print.o
+                0x000061be                String::length() const
+                0x000061de                Print::write(char const*)
+                0x00006234                Print::write(unsigned char const*, unsigned int)
+                0x000062ae                Print::print(char const*)
+                0x000062ee                Print::printNumber(unsigned long, unsigned char)
+                0x0000647c                Print::print(unsigned long, int)
+                0x000064ee                Print::print(unsigned int, int)
+                0x00006536                Print::print(unsigned char, int)
+                0x0000657a                Print::print(long, int)
+                0x00006646                Print::print(int, int)
+                0x00006692                Print::print(char, int)
+                0x000066d6                Print::println()
+                0x0000670a                Print::println(unsigned long, int)
+                0x00006762                Print::println(unsigned int, int)
+                0x000067a8                Print::println(int, int)
+                0x000067ee                Print::println(unsigned char, int)
+                0x0000682e                Print::println(char const*)
+                0x00006866                Print::println(char, int)
+                0x000068a6                Print::println(long, int)
+                0x000068fe                Print::printFloat(double, unsigned char)
+                0x00006ace                Print::print(double, int)
+                0x00006b1c                Print::println(double, int)
+                0x00006b74                Print::print(String const&)
+                0x00006c02                Print::println(String const&)
+ .text          0x00006c3a      0xd50 ./lib/arduino/Tone.o
+                0x000071ca                disableTimer(unsigned char)
+                0x00007292                noTone(unsigned char)
+                0x0000731e                __vector_13
+                0x00007414                tone(unsigned char, unsigned int, unsigned long)
+ .text          0x0000798a      0x6e4 ./lib/arduino/WInterrupts.o
+                0x0000798a                attachInterrupt
+                0x00007bc2                detachInterrupt
+                0x00007cde                __vector_1
+                0x00007d50                __vector_2
+                0x00007dc2                __vector_3
+                0x00007e34                __vector_4
+                0x00007ea6                __vector_5
+                0x00007f18                __vector_6
+                0x00007f8a                __vector_7
+                0x00007ffc                __vector_8
+ .text          0x0000806e      0x2aa ./lib/arduino/WMath.o
+                0x0000806e                map(long, long, long, long, long)
+                0x00008150                makeWord(unsigned int)
+                0x0000816c                makeWord(unsigned char, unsigned char)
+                0x00008198                random(long)
+                0x00008210                random(long, long)
+                0x000082e6                randomSeed(unsigned int)
+ .text          0x00008318     0x1b34 ./lib/arduino/WString.o
+                0x00008338                String::setCharAt(unsigned int, char)
+                0x00008394                String::operator[](unsigned int)
+                0x00008402                String::operator[](unsigned int) const
+                0x00008438                String::charAt(unsigned int) const
+                0x00008468                String::toInt()
+                0x00008494                String::toCharArray(char*, unsigned int)
+                0x00008526                String::getBytes(unsigned char*, unsigned int)
+                0x000085b8                String::~String()
+                0x000085f4                String::startsWith(String const&, unsigned int) const
+                0x0000867c                String::startsWith(String const&) const
+                0x000086d2                String::lastIndexOf(char, unsigned int) const
+                0x000087aa                String::lastIndexOf(char) const
+                0x000087e2                String::indexOf(String const&, unsigned int) const
+                0x0000887e                String::indexOf(String const&) const
+                0x000088b2                String::indexOf(char, unsigned int) const
+                0x0000894e                String::indexOf(char) const
+                0x0000897a                String::equals(String const&) const
+                0x000089da                String::endsWith(String const&) const
+                0x00008a58                String::operator>=(String const&) const
+                0x00008aaa                String::operator<=(String const&) const
+                0x00008afe                String::operator>(String const&) const
+                0x00008b52                String::operator<(String const&) const
+                0x00008ba4                String::operator!=(String const&) const
+                0x00008c10                String::operator==(String const&) const
+                0x00008c74                String::compareTo(String const&) const
+                0x00008cac                String::operator+=(String const&)
+                0x00008da0                String::concat(String const&)
+                0x00008dd0                String::getBuffer(unsigned int)
+                0x00008e38                String::operator=(String const&)
+                0x00008eea                String::String(unsigned char)
+                0x00008f48                String::String(unsigned char)
+                0x00008fa6                String::String(char)
+                0x00009004                String::String(char)
+                0x00009062                String::String(String const&)
+                0x000090c8                String::String(String const&)
+                0x0000912e                String::String(unsigned long, int)
+                0x000091c2                String::String(unsigned long, int)
+                0x00009256                String::String(unsigned int, int)
+                0x000092ea                String::String(unsigned int, int)
+                0x0000937e                String::String(char const*)
+                0x000093f0                String::toUpperCase() const
+                0x00009494                String::toLowerCase() const
+                0x00009538                String::equalsIgnoreCase(String const&) const
+                0x000095e4                String::substring(unsigned int, unsigned int) const
+                0x000096c2                String::substring(unsigned int) const
+                0x0000970e                String::lastIndexOf(String const&, unsigned int) const
+                0x0000983a                String::lastIndexOf(String const&) const
+                0x00009880                String::trim() const
+                0x00009992                String::replace(String const&, String const&)
+                0x00009ae4                String::replace(char, char)
+                0x00009b9e                String::String(char const*)
+                0x00009c10                String::String(long, int)
+                0x00009ca6                String::String(long, int)
+                0x00009d3c                String::String(int, int)
+                0x00009dc4                String::String(int, int)
+ .text          0x00009e4c        0x0 ./lib/arduino/pins_arduino.o
+ .text          0x00009e4c      0x41e ./lib/arduino/wiring.o
+                0x00009e4c                __vector_23
+                0x00009f2c                millis
+                0x00009f80                micros
+                0x0000a036                delay
+                0x0000a0bc                delayMicroseconds
+                0x0000a10c                init
+ .text          0x0000a26a      0x3d2 ./lib/arduino/wiring_analog.o
+                0x0000a26a                analogReference
+                0x0000a284                analogRead
+                0x0000a344                analogWrite
+ .text          0x0000a63c      0x49e ./lib/arduino/wiring_digital.o
+                0x0000a63c                pinMode
+                0x0000a8fe                digitalWrite
+                0x0000aa06                digitalRead
+ .text          0x0000aada      0x2a2 ./lib/arduino/wiring_pulse.o
+                0x0000aada                pulseIn
+ .text          0x0000ad7c      0x142 ./lib/arduino/wiring_shift.o
+                0x0000ad7c                shiftIn
+                0x0000ae1c                shiftOut
+ .text          0x0000aebe      0x5cc ./lib/WiringSerial/wiring_serial.o
+                0x0000aebe                beginSerial
+                0x0000afb0                serialWrite
+                0x0000afde                serialAvailable
+                0x0000b014                serialRead
+                0x0000b088                serialFlush
+                0x0000b0a6                USART_RX_vect
+                0x0000b158                printByte
+                0x0000b172                printString
+                0x0000b1ac                printPgmString
+                0x0000b1fc                printIntegerInBase
+                0x0000b374                printInteger
+                0x0000b3de                printFloat
+ .text          0x0000b48a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
+ .text          0x0000b48a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
+ .text          0x0000b48a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
+ .text          0x0000b48a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
+ .text          0x0000b48a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .text          0x0000b48a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+ .text          0x0000b48a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
+ .text          0x0000b48a       0x58 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
+                0x0000b48a                __fixunssfsi
+ .text          0x0000b4e2      0x354 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
+                0x0000b77a                __subsf3
+                0x0000b7dc                __addsf3
+ .text          0x0000b836      0x1f4 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
+                0x0000b836                __mulsf3
+ .text          0x0000ba2a      0x158 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_div_sf.o)
+                0x0000ba2a                __divsf3
+ .text          0x0000bb82       0x60 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ge_sf.o)
+                0x0000bb82                __gesf2
+ .text          0x0000bbe2       0x60 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
+                0x0000bbe2                __ltsf2
+ .text          0x0000bc42       0xbc /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
+                0x0000bc42                __floatsisf
+ .text          0x0000bcfe       0xa8 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
+                0x0000bcfe                __fixsfsi
+ .text          0x0000bda6        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_thenan_sf.o)
+ .text          0x0000bda6       0xf2 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
+                0x0000bda6                __floatunsisf
+ .text          0x0000be98        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
+ .text          0x0000be98        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
+ .text          0x0000be98        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
+ .text          0x0000be98        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
+ .text          0x0000be98       0x9e /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clzsi2.o)
+                0x0000be98                __clzsi2
+ .text          0x0000bf36      0x1aa /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_pack_sf.o)
+                0x0000bf36                __pack_f
+ .text          0x0000c0e0       0xf0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_unpack_sf.o)
+                0x0000c0e0                __unpack_f
+ .text          0x0000c1d0       0xb2 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fpcmp_parts_sf.o)
+                0x0000c1d0                __fpcmp_parts_f
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clz.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncasecmp_P.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fp_cmp.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen_P.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fputc.o)
+ .text          0x0000c282        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa_invert.o)
+                0x0000c282                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00009fc0       0x3e /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
-                0x00009fc0                __mulsi3
- .text.libgcc   0x00009ffe       0x26 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
-                0x00009ffe                __divmodhi4
-                0x00009ffe                _div
- .text.libgcc   0x0000a024       0x44 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
-                0x0000a024                __udivmodsi4
- .text.libgcc   0x0000a068       0x36 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
-                0x0000a068                __divmodsi4
- .text.libgcc   0x0000a09e        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
- .text.libgcc   0x0000a09e        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
- .text.libgcc   0x0000a09e        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
- .text.libgcc   0x0000a09e       0x28 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
-                0x0000a09e                __udivmodhi4
- .text.libgcc   0x0000a0c6       0x38 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
-                0x0000a0c6                __prologue_saves__
- .text.libgcc   0x0000a0fe       0x36 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
-                0x0000a0fe                __epilogue_restores__
- .text.libgcc   0x0000a134        0xc /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
-                0x0000a134                __tablejump2__
-                0x0000a138                __tablejump__
+ .text.libgcc   0x0000c282       0x3e /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
+                0x0000c282                __mulsi3
+ .text.libgcc   0x0000c2c0       0x26 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
+                0x0000c2c0                __divmodhi4
+                0x0000c2c0                _div
+ .text.libgcc   0x0000c2e6       0x44 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
+                0x0000c2e6                __udivmodsi4
+ .text.libgcc   0x0000c32a       0x36 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
+                0x0000c32a                __divmodsi4
+ .text.libgcc   0x0000c360        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .text.libgcc   0x0000c360        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x0000c360        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
+ .text.libgcc   0x0000c360       0x28 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
+                0x0000c360                __udivmodhi4
+ .text.libgcc   0x0000c388       0x38 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
+                0x0000c388                __prologue_saves__
+ .text.libgcc   0x0000c3c0       0x36 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
+                0x0000c3c0                __epilogue_restores__
+ .text.libgcc   0x0000c3f6        0xc /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
+                0x0000c3f6                __tablejump2__
+                0x0000c3fa                __tablejump__
  .text.avr-libc.fplib
-                0x0000a140       0x66 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
-                0x0000a140                modff
-                0x0000a140                modf
+                0x0000c402       0x66 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
+                0x0000c402                modff
+                0x0000c402                modf
  .text.avr-libc.fplib
-                0x0000a1a6       0x40 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
-                0x0000a1a6                round
+                0x0000c468       0x40 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
+                0x0000c468                round
  .text.avr-libc.fplib
-                0x0000a1e6       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
-                0x0000a1ee                sqrt
+                0x0000c4a8       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
+                0x0000c4b0                sqrt
  .text.avr-libc.fplib
-                0x0000a26a       0x36 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
-                0x0000a26a                __fp_mintl
+                0x0000c52c       0x36 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
+                0x0000c52c                __fp_mintl
  .text.avr-libc.fplib
-                0x0000a2a0       0x1c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
-                0x0000a2a0                __fp_mpack
-                0x0000a2a4                __fp_mpack_finite
+                0x0000c562       0x1c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
+                0x0000c562                __fp_mpack
+                0x0000c566                __fp_mpack_finite
  .text.avr-libc.fplib
-                0x0000a2bc        0x6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
-                0x0000a2bc                __fp_nan
+                0x0000c57e        0x6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
+                0x0000c57e                __fp_nan
  .text.avr-libc.fplib
-                0x0000a2c2        0xe /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
-                0x0000a2c2                __fp_norm2
+                0x0000c584        0xe /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
+                0x0000c584                __fp_norm2
  .text.avr-libc.fplib
-                0x0000a2d0       0x44 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
-                0x0000a2d0                __fp_split3
-                0x0000a2e0                __fp_splitA
+                0x0000c592       0x44 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
+                0x0000c592                __fp_split3
+                0x0000c5a2                __fp_splitA
  .text.avr-libc.fplib
-                0x0000a314        0xe /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
-                0x0000a314                __fp_zero
-                0x0000a316                __fp_szero
+                0x0000c5d6        0xe /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
+                0x0000c5d6                __fp_zero
+                0x0000c5d8                __fp_szero
  .text.avr-libc
-                0x0000a322      0x20a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
-                0x0000a322                malloc
-                0x0000a47c                free
+                0x0000c5e4      0x20a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+                0x0000c5e4                malloc
+                0x0000c73e                free
  .text.avr-libc
-                0x0000a52c       0xd6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
-                0x0000a5e0                random_r
-                0x0000a5e6                random
-                0x0000a5f0                srandom
+                0x0000c7ee       0xd6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
+                0x0000c8a2                random_r
+                0x0000c8a8                random
+                0x0000c8b2                srandom
  .text.avr-libc
-                0x0000a602      0x1b8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
-                0x0000a602                realloc
+                0x0000c8c4      0x1b8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
+                0x0000c8c4                realloc
  .text.avr-libc
-                0x0000a7ba       0x4e /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
-                0x0000a7ba                atol
+                0x0000ca7c      0x2dc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+                0x0000ca7c                strtod
  .text.avr-libc
-                0x0000a808       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
-                0x0000a808                isspace
+                0x0000cd58      0x25e /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+                0x0000cd58                strtol
  .text.avr-libc
-                0x0000a818       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
-                0x0000a818                tolower
+                0x0000cfb6       0x4e /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
+                0x0000cfb6                atol
  .text.avr-libc
-                0x0000a828       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
-                0x0000a828                toupper
+                0x0000d004       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
+                0x0000d004                isspace
  .text.avr-libc
-                0x0000a838       0x12 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
-                0x0000a838                memcpy
+                0x0000d014       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
+                0x0000d014                tolower
  .text.avr-libc
-                0x0000a84a       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
-                0x0000a84a                strcat
+                0x0000d024       0x10 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
+                0x0000d024                toupper
  .text.avr-libc
-                0x0000a860       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
-                0x0000a860                strchr
+                0x0000d034       0x30 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncasecmp_P.o)
+                0x0000d034                strncasecmp_P
  .text.avr-libc
-                0x0000a876       0x12 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
-                0x0000a876                strcmp
+                0x0000d064       0x12 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
+                0x0000d064                memcpy
  .text.avr-libc
-                0x0000a888        0xe /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
-                0x0000a888                strcpy
+                0x0000d076       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
+                0x0000d076                strcat
  .text.avr-libc
-                0x0000a896       0x12 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
-                0x0000a896                strlen
+                0x0000d08c       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
+                0x0000d08c                strchr
  .text.avr-libc
-                0x0000a8a8       0x1c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
-                0x0000a8a8                strncmp
+                0x0000d0a2       0x12 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
+                0x0000d0a2                strcmp
  .text.avr-libc
-                0x0000a8c4       0x1e /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
-                0x0000a8c4                strncpy
+                0x0000d0b4        0xe /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
+                0x0000d0b4                strcpy
  .text.avr-libc
-                0x0000a8e2       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
-                0x0000a8e2                strrchr
+                0x0000d0c2       0x12 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
+                0x0000d0c2                strlen
  .text.avr-libc
-                0x0000a8f8       0x34 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
-                0x0000a8f8                strstr
+                0x0000d0d4       0x1c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
+                0x0000d0d4                strncmp
  .text.avr-libc
-                0x0000a92c       0x42 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
-                0x0000a92c                itoa
+                0x0000d0f0       0x1e /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
+                0x0000d0f0                strncpy
  .text.avr-libc
-                0x0000a96e       0x68 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
-                0x0000a96e                ltoa
+                0x0000d10e       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
+                0x0000d10e                strrchr
  .text.avr-libc
-                0x0000a9d6       0x2a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
-                0x0000a9d6                __mulsi_const_10
+                0x0000d124       0x34 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
+                0x0000d124                strstr
  .text.avr-libc
-                0x0000aa00       0x4a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
-                0x0000aa00                ultoa
+                0x0000d158       0x42 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
+                0x0000d158                itoa
  .text.avr-libc
-                0x0000aa4a        0x6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
-                0x0000aa4a                __ctype_isfalse
-                0x0000aa4e                __ctype_istrue
+                0x0000d19a       0x68 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
+                0x0000d19a                ltoa
  .text.avr-libc
-                0x0000aa50       0x20 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
-                0x0000aa50                strrev
-                0x0000aa70                . = ALIGN (0x2)
+                0x0000d202       0x2a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
+                0x0000d202                __mulsi_const_10
+ .text.avr-libc
+                0x0000d22c       0x4a /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
+                0x0000d22c                ultoa
+ .text.avr-libc
+                0x0000d276       0x62 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
+                0x0000d276                sprintf
+ .text.avr-libc.fplib
+                0x0000d2d8        0x8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+                0x0000d2d8                __lesf2
+                0x0000d2d8                __nesf2
+                0x0000d2d8                __eqsf2
+                0x0000d2d8                __cmpsf2
+ .text.avr-libc.fplib
+                0x0000d2e0       0x48 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fp_cmp.o)
+                0x0000d2e0                __fp_cmp
+ .text.avr-libc
+                0x0000d328      0x40c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+                0x0000d328                vfprintf
+ .text.avr-libc
+                0x0000d734        0x6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
+                0x0000d734                __ctype_isfalse
+                0x0000d738                __ctype_istrue
+ .text.avr-libc
+                0x0000d73a       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen_P.o)
+                0x0000d73a                strnlen_P
+ .text.avr-libc
+                0x0000d750       0x16 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen.o)
+                0x0000d750                strnlen
+ .text.avr-libc
+                0x0000d766       0x20 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
+                0x0000d766                strrev
+ .text.avr-libc
+                0x0000d786       0x58 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fputc.o)
+                0x0000d786                fputc
+ .text.avr-libc
+                0x0000d7de       0xbc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa_invert.o)
+                0x0000d7de                __ultoa_invert
+                0x0000d89a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000aa70        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
-                0x0000aa70                exit
-                0x0000aa70                _exit
+ .fini9         0x0000d89a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+                0x0000d89a                exit
+                0x0000d89a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -794,245 +895,289 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000aa70        0x4 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .fini0         0x0000d89a        0x4 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
  *(.fini0)
-                0x0000aa74                _etext = .
+                0x0000d89e                _etext = .
 
-.data           0x00800200      0x16e load address 0x0000aa74
+.data           0x00800200      0x34c load address 0x0000d89e
                 0x00800200                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800200        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
  .data          0x00800200        0x0 ./src/cartesian_dda.o
  .data          0x00800200        0x0 ./src/fancy.o
- .data          0x00800200       0x18 ./src/firmware.o
-                0x00800209                EXTRUDER_NAME
-                0x00800216                HEATED_BED_NAME
- .data          0x00800218        0x0 ./src/main.o
- .data          0x00800218        0x0 ./src/toolhead_stepper.o
- .data          0x00800218        0x0 ./src/vectors.o
- .data          0x00800218       0x24 ./lib/arduino/HardwareSerial.o
-                0x00800218                vtable for HardwareSerial
-                0x0080022a                vtable for Stream
- .data          0x0080023c        0xc ./lib/arduino/Print.o
-                0x0080023e                vtable for Print
- .data          0x00800248        0x1 ./lib/arduino/Tone.o
- .data          0x00800249        0x0 ./lib/arduino/WInterrupts.o
- .data          0x00800249        0x0 ./lib/arduino/WMath.o
- .data          0x00800249        0x1 ./lib/arduino/WString.o
- .data          0x0080024a        0x4 ./lib/arduino/pins_arduino.o
- .data          0x0080024e        0x0 ./lib/arduino/wiring.o
- .data          0x0080024e        0x5 ./lib/arduino/wiring_analog.o
-                0x00800252                analog_reference
- .data          0x00800253        0x4 ./lib/arduino/wiring_digital.o
- .data          0x00800257        0x4 ./lib/arduino/wiring_pulse.o
- .data          0x0080025b        0x0 ./lib/arduino/wiring_shift.o
- .data          0x0080025b        0x0 ./lib/WiringSerial/wiring_serial.o
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_div_sf.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ge_sf.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
- .data          0x0080025b        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
- .data          0x0080025b        0x8 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_thenan_sf.o)
-                0x0080025b                __thenan_sf
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clzsi2.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_pack_sf.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_unpack_sf.o)
- .data          0x00800263        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fpcmp_parts_sf.o)
- .data          0x00800263      0x100 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clz.o)
-                0x00800263                __clz_tab
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
- .data          0x00800363        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
- .data          0x00800363        0x6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
-                0x00800363                __malloc_margin
-                0x00800365                __malloc_heap_start
-                0x00800367                __malloc_heap_end
- .data          0x00800369        0x4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
- .data          0x0080036d        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
+ .data          0x00800200       0x90 ./src/firmware.o
+                0x00800281                EXTRUDER_NAME
+                0x0080028e                HEATED_BED_NAME
+ .data          0x00800290        0x0 ./src/hostcom.o
+ .data          0x00800290        0x0 ./src/main.o
+ .data          0x00800290      0x167 ./src/process_g_code.o
+                0x008003f2                c
+                0x008003f3                SendDebug
+                0x008003f4                last_gcode_g
+                0x008003f6                abs_mode
+ .data          0x008003f7        0x0 ./src/toolhead_stepper.o
+ .data          0x008003f7        0x0 ./src/vectors.o
+ .data          0x008003f7       0x24 ./lib/arduino/HardwareSerial.o
+                0x008003f7                vtable for HardwareSerial
+                0x00800409                vtable for Stream
+ .data          0x0080041b        0xc ./lib/arduino/Print.o
+                0x0080041d                vtable for Print
+ .data          0x00800427        0x1 ./lib/arduino/Tone.o
+ .data          0x00800428        0x0 ./lib/arduino/WInterrupts.o
+ .data          0x00800428        0x0 ./lib/arduino/WMath.o
+ .data          0x00800428        0x1 ./lib/arduino/WString.o
+ .data          0x00800429        0x4 ./lib/arduino/pins_arduino.o
+ .data          0x0080042d        0x0 ./lib/arduino/wiring.o
+ .data          0x0080042d        0x5 ./lib/arduino/wiring_analog.o
+                0x00800431                analog_reference
+ .data          0x00800432        0x4 ./lib/arduino/wiring_digital.o
+ .data          0x00800436        0x4 ./lib/arduino/wiring_pulse.o
+ .data          0x0080043a        0x0 ./lib/arduino/wiring_shift.o
+ .data          0x0080043a        0x0 ./lib/WiringSerial/wiring_serial.o
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_div_sf.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ge_sf.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
+ .data          0x0080043a        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
+ .data          0x0080043a        0x8 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_thenan_sf.o)
+                0x0080043a                __thenan_sf
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clzsi2.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_pack_sf.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_unpack_sf.o)
+ .data          0x00800442        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fpcmp_parts_sf.o)
+ .data          0x00800442      0x100 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clz.o)
+                0x00800442                __clz_tab
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
+ .data          0x00800542        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
+ .data          0x00800542        0x6 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+                0x00800542                __malloc_margin
+                0x00800544                __malloc_heap_start
+                0x00800546                __malloc_heap_end
+ .data          0x00800548        0x4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncasecmp_P.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fp_cmp.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen_P.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fputc.o)
+ .data          0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa_invert.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x0080036e                . = ALIGN (0x2)
- *fill*         0x0080036d        0x1 00
-                0x0080036e                _edata = .
-                0x0080036e                PROVIDE (__data_end, .)
+                0x0080054c                . = ALIGN (0x2)
+                0x0080054c                _edata = .
+                0x0080054c                PROVIDE (__data_end, .)
 
-.bss            0x0080036e      0x580
-                0x0080036e                PROVIDE (__bss_start, .)
+.bss            0x0080054c      0xe2e
+                0x0080054c                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x0080036e        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
- .bss           0x0080036e        0x2 ./src/cartesian_dda.o
-                0x0080036e                extruder_in_use
- .bss           0x00800370        0x2 ./src/fancy.o
- .bss           0x00800372      0x2d0 ./src/firmware.o
-                0x00800374                cdda
-                0x0080037c                head
-                0x0080037d                tail
-                0x0080037e                led
-                0x0080037f                interruptBlink
-                0x00800381                where_i_am
-                0x00800395                nonest
- .bss           0x00800642        0x0 ./src/main.o
- .bss           0x00800642        0x2 ./src/toolhead_stepper.o
- .bss           0x00800644        0x2 ./src/vectors.o
- .bss           0x00800646      0x25c ./lib/arduino/HardwareSerial.o
-                0x00800646                rx_buffer
-                0x008006ca                rx_buffer1
-                0x0080074e                rx_buffer2
-                0x008007d2                rx_buffer3
-                0x00800856                Serial
-                0x00800869                Serial1
-                0x0080087c                Serial2
-                0x0080088f                Serial3
- .bss           0x008008a2        0x0 ./lib/arduino/Print.o
- .bss           0x008008a2       0x2a ./lib/arduino/Tone.o
-                0x008008a2                timer0_toggle_count
-                0x008008a6                timer0_pin_port
-                0x008008a8                timer0_pin_mask
-                0x008008a9                timer1_toggle_count
-                0x008008ad                timer1_pin_port
-                0x008008af                timer1_pin_mask
-                0x008008b0                timer2_toggle_count
-                0x008008b4                timer2_pin_port
-                0x008008b6                timer2_pin_mask
-                0x008008b7                timer3_toggle_count
-                0x008008bb                timer3_pin_port
-                0x008008bd                timer3_pin_mask
-                0x008008be                timer4_toggle_count
-                0x008008c2                timer4_pin_port
-                0x008008c4                timer4_pin_mask
-                0x008008c5                timer5_toggle_count
-                0x008008c9                timer5_pin_port
-                0x008008cb                timer5_pin_mask
- .bss           0x008008cc       0x10 ./lib/arduino/WInterrupts.o
- .bss           0x008008dc        0x0 ./lib/arduino/WMath.o
- .bss           0x008008dc        0x1 ./lib/arduino/WString.o
- .bss           0x008008dd        0x0 ./lib/arduino/pins_arduino.o
- .bss           0x008008dd        0x9 ./lib/arduino/wiring.o
-                0x008008dd                timer0_overflow_count
-                0x008008e1                timer0_millis
- .bss           0x008008e6        0x0 ./lib/arduino/wiring_analog.o
- .bss           0x008008e6        0x0 ./lib/arduino/wiring_digital.o
- .bss           0x008008e6        0x0 ./lib/arduino/wiring_pulse.o
- .bss           0x008008e6        0x0 ./lib/arduino/wiring_shift.o
- .bss           0x008008e6        0x4 ./lib/WiringSerial/wiring_serial.o
-                0x008008e6                rx_buffer_head
-                0x008008e8                rx_buffer_tail
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_div_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ge_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_thenan_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clzsi2.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_pack_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_unpack_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fpcmp_parts_sf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clz.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
- .bss           0x008008ea        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
+ .bss           0x0080054c        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
+ .bss           0x0080054c      0x11a ./src/cartesian_dda.o
+ .bss           0x00800666      0x11a ./src/fancy.o
+ .bss           0x00800780      0x3fa ./src/firmware.o
+                0x00800780                waitForTemperature
+                0x00800782                waitForAllTemperatures
+                0x00800784                heatedBed
+                0x00800786                ex0
+                0x00800792                cdda
+                0x0080079a                head
+                0x0080079b                tail
+                0x0080079c                led
+                0x0080079d                interruptBlink
+                0x0080079f                where_i_am
+                0x008007b3                nonest
+ .bss           0x00800b7a      0x11a ./src/hostcom.o
+ .bss           0x00800c94        0x0 ./src/main.o
+ .bss           0x00800c94      0x206 ./src/process_g_code.o
+                0x00800c94                cmdbuffer
+                0x00800d14                serial_count
+                0x00800d15                comment
+                0x00800d16                fp
+                0x00800d2a                sp
+                0x00800d3e                extruder_speed
+                0x00800d42                gc
+ .bss           0x00800e9a      0x11c ./src/toolhead_stepper.o
+                0x00800e9a                extruder_in_use
+ .bss           0x00800fb6      0x11a ./src/vectors.o
+ .bss           0x008010d0      0x25c ./lib/arduino/HardwareSerial.o
+                0x008010d0                rx_buffer
+                0x00801154                rx_buffer1
+                0x008011d8                rx_buffer2
+                0x0080125c                rx_buffer3
+                0x008012e0                Serial
+                0x008012f3                Serial1
+                0x00801306                Serial2
+                0x00801319                Serial3
+ .bss           0x0080132c        0x0 ./lib/arduino/Print.o
+ .bss           0x0080132c       0x2a ./lib/arduino/Tone.o
+                0x0080132c                timer0_toggle_count
+                0x00801330                timer0_pin_port
+                0x00801332                timer0_pin_mask
+                0x00801333                timer1_toggle_count
+                0x00801337                timer1_pin_port
+                0x00801339                timer1_pin_mask
+                0x0080133a                timer2_toggle_count
+                0x0080133e                timer2_pin_port
+                0x00801340                timer2_pin_mask
+                0x00801341                timer3_toggle_count
+                0x00801345                timer3_pin_port
+                0x00801347                timer3_pin_mask
+                0x00801348                timer4_toggle_count
+                0x0080134c                timer4_pin_port
+                0x0080134e                timer4_pin_mask
+                0x0080134f                timer5_toggle_count
+                0x00801353                timer5_pin_port
+                0x00801355                timer5_pin_mask
+ .bss           0x00801356       0x10 ./lib/arduino/WInterrupts.o
+ .bss           0x00801366        0x0 ./lib/arduino/WMath.o
+ .bss           0x00801366        0x1 ./lib/arduino/WString.o
+ .bss           0x00801367        0x0 ./lib/arduino/pins_arduino.o
+ .bss           0x00801367        0x9 ./lib/arduino/wiring.o
+                0x00801367                timer0_overflow_count
+                0x0080136b                timer0_millis
+ .bss           0x00801370        0x0 ./lib/arduino/wiring_analog.o
+ .bss           0x00801370        0x0 ./lib/arduino/wiring_digital.o
+ .bss           0x00801370        0x0 ./lib/arduino/wiring_pulse.o
+ .bss           0x00801370        0x0 ./lib/arduino/wiring_shift.o
+ .bss           0x00801370        0x4 ./lib/WiringSerial/wiring_serial.o
+                0x00801370                rx_buffer_head
+                0x00801372                rx_buffer_tail
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_div_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ge_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_thenan_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodhi4.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_prologue.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clzsi2.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_pack_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_unpack_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fpcmp_parts_sf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clz.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncasecmp_P.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fp_cmp.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen_P.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fputc.o)
+ .bss           0x00801374        0x0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa_invert.o)
  *(.bss*)
  *(COMMON)
- COMMON         0x008008ea        0x4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
-                0x008008ea                __brkval
-                0x008008ec                __flp
-                0x008008ee                PROVIDE (__bss_end, .)
-                0x0000aa74                __data_load_start = LOADADDR (.data)
-                0x0000abe2                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00801374        0x4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+                0x00801374                __brkval
+                0x00801376                __flp
+ COMMON         0x00801378        0x2 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
+                0x00801378                errno
+                0x0080137a                PROVIDE (__bss_end, .)
+                0x0000d89e                __data_load_start = LOADADDR (.data)
+                0x0000dbea                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008008ee        0x0
-                0x008008ee                PROVIDE (__noinit_start, .)
+.noinit         0x0080137a        0x0
+                0x0080137a                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x008008ee                PROVIDE (__noinit_end, .)
-                0x008008ee                _end = .
-                0x008008ee                PROVIDE (__heap_start, .)
+                0x0080137a                PROVIDE (__noinit_end, .)
+                0x0080137a                _end = .
+                0x0080137a                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -1050,115 +1195,143 @@ LOAD /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a
 .signature
  *(.signature*)
 
-.stab           0x00000000     0xf2e8
+.stab           0x00000000    0x13578
  *(.stab)
  .stab          0x00000000      0x750 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
- .stab          0x00000750     0x15cc ./src/cartesian_dda.o
-                               0x15d8 (size before relaxing)
- .stab          0x00001d1c      0x594 ./src/fancy.o
-                                0x5a0 (size before relaxing)
- .stab          0x000022b0     0x132c ./src/firmware.o
-                               0x1338 (size before relaxing)
- .stab          0x000035dc      0x4bc ./src/main.o
-                                0x4c8 (size before relaxing)
- .stab          0x00003a98      0x8dc ./src/toolhead_stepper.o
-                                0x8e8 (size before relaxing)
- .stab          0x00004374      0x594 ./src/vectors.o
-                                0x5a0 (size before relaxing)
- .stab          0x00004908      0xd2c ./lib/arduino/HardwareSerial.o
-                                0xd38 (size before relaxing)
- .stab          0x00005634      0xe58 ./lib/arduino/Print.o
-                                0xe64 (size before relaxing)
- .stab          0x0000648c     0x1170 ./lib/arduino/Tone.o
-                               0x117c (size before relaxing)
- .stab          0x000075fc      0x864 ./lib/arduino/WInterrupts.o
-                                0x870 (size before relaxing)
- .stab          0x00007e60      0x3cc ./lib/arduino/WMath.o
-                                0x3d8 (size before relaxing)
- .stab          0x0000822c     0x2070 ./lib/arduino/WString.o
-                               0x207c (size before relaxing)
- .stab          0x0000a29c      0x210 ./lib/arduino/pins_arduino.o
-                                0x534 (size before relaxing)
- .stab          0x0000a4ac      0x5f4 ./lib/arduino/wiring.o
-                                0x894 (size before relaxing)
- .stab          0x0000aaa0      0x4f8 ./lib/arduino/wiring_analog.o
-                                0x834 (size before relaxing)
- .stab          0x0000af98      0x84c ./lib/arduino/wiring_digital.o
-                                0xb88 (size before relaxing)
- .stab          0x0000b7e4      0x414 ./lib/arduino/wiring_pulse.o
-                                0x750 (size before relaxing)
- .stab          0x0000bbf8      0x318 ./lib/arduino/wiring_shift.o
-                                0x5b8 (size before relaxing)
- .stab          0x0000bf10      0x654 ./lib/WiringSerial/wiring_serial.o
-                                0x8ac (size before relaxing)
- .stab          0x0000c564      0x2a0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
-                                0x2ac (size before relaxing)
- .stab          0x0000c804      0x1b0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
-                                0x1bc (size before relaxing)
- .stab          0x0000c9b4      0x354 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
-                                0x360 (size before relaxing)
- .stab          0x0000cd08      0x174 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
-                                0x180 (size before relaxing)
- .stab          0x0000ce7c       0xe4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
-                                 0xf0 (size before relaxing)
- .stab          0x0000cf60       0x54 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
-                                 0x60 (size before relaxing)
- .stab          0x0000cfb4       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
-                                 0x90 (size before relaxing)
- .stab          0x0000d038      0x1d4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
-                                0x1e0 (size before relaxing)
- .stab          0x0000d20c       0x90 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
-                                 0x9c (size before relaxing)
- .stab          0x0000d29c      0x6f0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+ .stab          0x00000750     0x1674 ./src/cartesian_dda.o
+                               0x1680 (size before relaxing)
+ .stab          0x00001dc4      0x630 ./src/fancy.o
+                                0x63c (size before relaxing)
+ .stab          0x000023f4     0x1530 ./src/firmware.o
+                               0x153c (size before relaxing)
+ .stab          0x00003924      0x6f0 ./src/hostcom.o
                                 0x6fc (size before relaxing)
- .stab          0x0000d98c      0x2dc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
-                                0x33c (size before relaxing)
- .stab          0x0000dc68      0x3b4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
-                                0x5ac (size before relaxing)
- .stab          0x0000e01c      0x1e0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
-                                0x1ec (size before relaxing)
- .stab          0x0000e1fc       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
-                                 0xa8 (size before relaxing)
- .stab          0x0000e298       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
-                                 0xa8 (size before relaxing)
- .stab          0x0000e334       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
-                                 0xa8 (size before relaxing)
- .stab          0x0000e3d0       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
-                                 0x90 (size before relaxing)
- .stab          0x0000e454       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
-                                 0xa8 (size before relaxing)
- .stab          0x0000e4f0       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
-                                 0xa8 (size before relaxing)
- .stab          0x0000e58c       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
-                                 0x90 (size before relaxing)
- .stab          0x0000e610       0x6c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
-                                 0x78 (size before relaxing)
- .stab          0x0000e67c       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
-                                 0x90 (size before relaxing)
- .stab          0x0000e700       0xc0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
-                                 0xcc (size before relaxing)
- .stab          0x0000e7c0       0xcc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
-                                 0xd8 (size before relaxing)
- .stab          0x0000e88c       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
-                                 0xa8 (size before relaxing)
- .stab          0x0000e928      0x150 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
-                                0x15c (size before relaxing)
- .stab          0x0000ea78      0x1b0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
+ .stab          0x00004014      0x4bc ./src/main.o
+                                0x4c8 (size before relaxing)
+ .stab          0x000044d0     0x1614 ./src/process_g_code.o
+                               0x1620 (size before relaxing)
+ .stab          0x00005ae4      0x990 ./src/toolhead_stepper.o
+                                0x99c (size before relaxing)
+ .stab          0x00006474      0x63c ./src/vectors.o
+                                0x648 (size before relaxing)
+ .stab          0x00006ab0      0xd2c ./lib/arduino/HardwareSerial.o
+                                0xd38 (size before relaxing)
+ .stab          0x000077dc      0xe58 ./lib/arduino/Print.o
+                                0xe64 (size before relaxing)
+ .stab          0x00008634     0x1170 ./lib/arduino/Tone.o
+                               0x117c (size before relaxing)
+ .stab          0x000097a4      0x864 ./lib/arduino/WInterrupts.o
+                                0x870 (size before relaxing)
+ .stab          0x0000a008      0x3cc ./lib/arduino/WMath.o
+                                0x3d8 (size before relaxing)
+ .stab          0x0000a3d4     0x2070 ./lib/arduino/WString.o
+                               0x207c (size before relaxing)
+ .stab          0x0000c444      0x210 ./lib/arduino/pins_arduino.o
+                                0x534 (size before relaxing)
+ .stab          0x0000c654      0x5f4 ./lib/arduino/wiring.o
+                                0x894 (size before relaxing)
+ .stab          0x0000cc48      0x4f8 ./lib/arduino/wiring_analog.o
+                                0x834 (size before relaxing)
+ .stab          0x0000d140      0x84c ./lib/arduino/wiring_digital.o
+                                0xb88 (size before relaxing)
+ .stab          0x0000d98c      0x414 ./lib/arduino/wiring_pulse.o
+                                0x750 (size before relaxing)
+ .stab          0x0000dda0      0x318 ./lib/arduino/wiring_shift.o
+                                0x5b8 (size before relaxing)
+ .stab          0x0000e0b8      0x654 ./lib/WiringSerial/wiring_serial.o
+                                0x8ac (size before relaxing)
+ .stab          0x0000e70c      0x2a0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
+                                0x2ac (size before relaxing)
+ .stab          0x0000e9ac      0x1b0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
                                 0x1bc (size before relaxing)
- .stab          0x0000ec28      0x294 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
-                                0x2a0 (size before relaxing)
- .stab          0x0000eebc      0x114 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
-                                0x120 (size before relaxing)
- .stab          0x0000efd0      0x1e0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
+ .stab          0x0000eb5c      0x354 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
+                                0x360 (size before relaxing)
+ .stab          0x0000eeb0      0x174 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
+                                0x180 (size before relaxing)
+ .stab          0x0000f024       0xe4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
+                                 0xf0 (size before relaxing)
+ .stab          0x0000f108       0x54 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_nan.o)
+                                 0x60 (size before relaxing)
+ .stab          0x0000f15c       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_norm2.o)
+                                 0x90 (size before relaxing)
+ .stab          0x0000f1e0      0x1d4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_split3.o)
+                                0x1e0 (size before relaxing)
+ .stab          0x0000f3b4       0x90 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_zero.o)
+                                 0x9c (size before relaxing)
+ .stab          0x0000f444      0x6f0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+                                0x6fc (size before relaxing)
+ .stab          0x0000fb34      0x2dc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
+                                0x33c (size before relaxing)
+ .stab          0x0000fe10      0x3b4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
+                                0x5ac (size before relaxing)
+ .stab          0x000101c4      0x66c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+                                0x858 (size before relaxing)
+ .stab          0x00010830      0x3a8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+                                0x408 (size before relaxing)
+ .stab          0x00010bd8      0x1e0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
                                 0x1ec (size before relaxing)
- .stab          0x0000f1b0       0x60 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
+ .stab          0x00010db8       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00010e54       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(tolower.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00010ef0       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(toupper.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00010f8c      0x138 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncasecmp_P.o)
+                                0x144 (size before relaxing)
+ .stab          0x000110c4       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(memcpy.o)
+                                 0x90 (size before relaxing)
+ .stab          0x00011148       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcat.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x000111e4       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strchr.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00011280       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcmp.o)
+                                 0x90 (size before relaxing)
+ .stab          0x00011304       0x6c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strcpy.o)
+                                 0x78 (size before relaxing)
+ .stab          0x00011370       0x84 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
+                                 0x90 (size before relaxing)
+ .stab          0x000113f4       0xc0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
+                                 0xcc (size before relaxing)
+ .stab          0x000114b4       0xcc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
+                                 0xd8 (size before relaxing)
+ .stab          0x00011580       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x0001161c      0x150 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
+                                0x15c (size before relaxing)
+ .stab          0x0001176c      0x1b0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
+                                0x1bc (size before relaxing)
+ .stab          0x0001191c      0x294 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
+                                0x2a0 (size before relaxing)
+ .stab          0x00011bb0      0x114 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
+                                0x120 (size before relaxing)
+ .stab          0x00011cc4      0x1e0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
+                                0x1ec (size before relaxing)
+ .stab          0x00011ea4      0x210 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
+                                0x3d8 (size before relaxing)
+ .stab          0x000120b4       0x90 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+                                 0x9c (size before relaxing)
+ .stab          0x00012144      0x1e0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fp_cmp.o)
+                                0x1ec (size before relaxing)
+ .stab          0x00012324      0x8a0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+                                0xb58 (size before relaxing)
+ .stab          0x00012bc4       0xf0 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
+                                 0xfc (size before relaxing)
+ .stab          0x00012cb4       0x60 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
                                  0x6c (size before relaxing)
- .stab          0x0000f210       0xd8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
+ .stab          0x00012d14       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen_P.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00012db0       0x9c /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen.o)
+                                 0xa8 (size before relaxing)
+ .stab          0x00012e4c       0xd8 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
                                  0xe4 (size before relaxing)
+ .stab          0x00012f24      0x1d4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fputc.o)
+                                0x3b4 (size before relaxing)
+ .stab          0x000130f8      0x480 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa_invert.o)
+                                0x48c (size before relaxing)
 
-.stabstr        0x00000000     0x86fc
+.stabstr        0x00000000     0x98a4
  *(.stabstr)
- .stabstr       0x00000000     0x86fc /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
+ .stabstr       0x00000000     0x98a4 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
 
 .stab.excl
  *(.stab.excl)
@@ -1257,6 +1430,7 @@ Print::write(char const*)                         ./lib/arduino/Print.o
                                                   ./lib/arduino/HardwareSerial.o
 Print::write(unsigned char const*, unsigned int)  ./lib/arduino/Print.o
                                                   ./lib/arduino/HardwareSerial.o
+SendDebug                                         ./src/process_g_code.o
 Serial                                            ./lib/arduino/HardwareSerial.o
 Serial1                                           ./lib/arduino/HardwareSerial.o
 Serial2                                           ./lib/arduino/HardwareSerial.o
@@ -1322,6 +1496,7 @@ String::~String()                                 ./lib/arduino/WString.o
 USART_RX_vect                                     ./lib/WiringSerial/wiring_serial.o
 __addsf3                                          /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
                                                   ./lib/arduino/Print.o
+                                                  ./src/process_g_code.o
                                                   ./src/cartesian_dda.o
 __bad_interrupt                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
 __brkval                                          /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
@@ -1333,6 +1508,7 @@ __clz_tab                                         /usr/lib/gcc/avr/4.3.5/avr51/l
 __clzsi2                                          /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clzsi2.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
+__cmpsf2                                          /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
 __ctors_end                                       /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
 __ctors_start                                     /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
 __ctype_isfalse                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cty_isfalse.o)
@@ -1355,6 +1531,7 @@ __divsf3                                          /usr/lib/gcc/avr/4.3.5/avr51/l
                                                   ./lib/arduino/Print.o
                                                   ./src/cartesian_dda.o
 __do_clear_bss                                    /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_clear_bss.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
                                                   ./lib/WiringSerial/wiring_serial.o
                                                   ./lib/arduino/wiring.o
@@ -1364,6 +1541,8 @@ __do_clear_bss                                    /usr/lib/gcc/avr/4.3.5/avr51/l
                                                   ./lib/arduino/HardwareSerial.o
                                                   ./src/vectors.o
                                                   ./src/toolhead_stepper.o
+                                                  ./src/process_g_code.o
+                                                  ./src/hostcom.o
                                                   ./src/firmware.o
                                                   ./src/fancy.o
                                                   ./src/cartesian_dda.o
@@ -1380,10 +1559,17 @@ __do_copy_data                                    /usr/lib/gcc/avr/4.3.5/../../.
                                                   ./lib/arduino/Tone.o
                                                   ./lib/arduino/Print.o
                                                   ./lib/arduino/HardwareSerial.o
+                                                  ./src/process_g_code.o
                                                   ./src/firmware.o
 __do_global_ctors                                 /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_ctors.o)
                                                   ./lib/arduino/HardwareSerial.o
+                                                  ./src/vectors.o
+                                                  ./src/toolhead_stepper.o
+                                                  ./src/process_g_code.o
+                                                  ./src/hostcom.o
                                                   ./src/firmware.o
+                                                  ./src/fancy.o
+                                                  ./src/cartesian_dda.o
 __epilogue_restores__                             /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_epilogue.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
@@ -1393,20 +1579,27 @@ __epilogue_restores__                             /usr/lib/gcc/avr/4.3.5/avr51/l
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_div_sf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_addsub_sf.o)
+__eqsf2                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
 __fixsfsi                                         /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
                                                   ./lib/WiringSerial/wiring_serial.o
                                                   ./lib/arduino/Print.o
+                                                  ./src/process_g_code.o
                                                   ./src/cartesian_dda.o
 __fixunssfsi                                      /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
                                                   ./lib/arduino/Print.o
+                                                  ./src/process_g_code.o
 __floatsisf                                       /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
                                                   ./lib/arduino/Print.o
                                                   ./src/cartesian_dda.o
 __floatunsisf                                     /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
                                                   ./lib/arduino/Print.o
 __flp                                             /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
+__fp_cmp                                          /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fp_cmp.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
 __fp_mintl                                        /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mintl.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(round.o)
 __fp_mpack                                        /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(fp_mpack.o)
@@ -1434,7 +1627,9 @@ __heap_end                                        /usr/lib/gcc/avr/4.3.5/../../.
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
 __heap_start                                      /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
 __init                                            /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
-__ltsf2                                           /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
+__lesf2                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+__ltsf2                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+                                                  /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
                                                   ./lib/arduino/Print.o
                                                   ./src/cartesian_dda.o
 __malloc_heap_end                                 /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
@@ -1443,10 +1638,12 @@ __malloc_heap_start                               /usr/lib/gcc/avr/4.3.5/../../.
 __malloc_margin                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
 __mulsf3                                          /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mul_sf.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
                                                   ./lib/WiringSerial/wiring_serial.o
                                                   ./lib/arduino/Print.o
                                                   ./src/cartesian_dda.o
 __mulsi3                                          /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_mulsi3.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
                                                   ./lib/arduino/wiring_pulse.o
                                                   ./lib/arduino/WMath.o
@@ -1454,6 +1651,8 @@ __mulsi3                                          /usr/lib/gcc/avr/4.3.5/avr51/l
                                                   ./src/cartesian_dda.o
 __mulsi_const_10                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(mulsi10.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(atol.o)
+__nesf2                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(cmpsf2.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
 __pack_f                                          /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_pack_sf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_usi_to_sf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_si_to_sf.o)
@@ -1474,6 +1673,7 @@ __subsf3                                          /usr/lib/gcc/avr/4.3.5/avr51/l
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(modf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_fixunssfsi.o)
                                                   ./lib/arduino/Print.o
+                                                  ./src/process_g_code.o
                                                   ./src/cartesian_dda.o
 __tablejump2__                                    /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
 __tablejump__                                     /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_tablejump.o)
@@ -1488,12 +1688,15 @@ __udivmodhi4                                      /usr/lib/gcc/avr/4.3.5/avr51/l
 __udivmodsi4                                      /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_udivmodsi4.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ltoa.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodsi4.o)
                                                   ./lib/WiringSerial/wiring_serial.o
                                                   ./lib/arduino/wiring_pulse.o
                                                   ./lib/arduino/Tone.o
                                                   ./lib/arduino/Print.o
                                                   ./lib/arduino/HardwareSerial.o
+__ultoa_invert                                    /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa_invert.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
 __unpack_f                                        /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_unpack_sf.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_sf_to_si.o)
                                                   /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_lt_sf.o)
@@ -1576,6 +1779,7 @@ __vector_default                                  /usr/lib/gcc/avr/4.3.5/../../.
 __vectors                                         /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
 _div                                              /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_divmodhi4.o)
 _exit                                             /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
+abs_mode                                          ./src/process_g_code.o
 absv(LongPoint const&)                            ./src/cartesian_dda.o
 add_toolhead                                      ./src/firmware.o
 analogRead                                        ./lib/arduino/wiring_analog.o
@@ -1587,6 +1791,7 @@ atol                                              /usr/lib/gcc/avr/4.3.5/../../.
 attachInterrupt                                   ./lib/arduino/WInterrupts.o
 beginSerial                                       ./lib/WiringSerial/wiring_serial.o
 blink()                                           ./src/firmware.o
+c                                                 ./src/process_g_code.o
 cancelAndClearQueue()                             ./src/firmware.o
 cartesian_dda::active()                           ./src/firmware.o
 cartesian_dda::calculate_feedrate_delay(float const&) ./src/cartesian_dda.o
@@ -1594,6 +1799,7 @@ cartesian_dda::cartesian_dda()                    ./src/cartesian_dda.o
 cartesian_dda::cartesian_dda()                    ./src/cartesian_dda.o
                                                   ./src/firmware.o
 cartesian_dda::dda_start()                        ./src/cartesian_dda.o
+                                                  ./src/firmware.o
 cartesian_dda::dda_step()                         ./src/cartesian_dda.o
                                                   ./src/firmware.o
 cartesian_dda::disable_steppers()                 ./src/cartesian_dda.o
@@ -1614,7 +1820,11 @@ cartesian_dda::xCanStep(long, long, bool)         ./src/cartesian_dda.o
 cartesian_dda::yCanStep(long, long, bool)         ./src/cartesian_dda.o
 cartesian_dda::zCanStep(long, long, bool)         ./src/cartesian_dda.o
 cdda                                              ./src/firmware.o
+cmdbuffer                                         ./src/process_g_code.o
+comment                                           ./src/process_g_code.o
+dQMove()                                          ./src/firmware.o
 delay                                             ./lib/arduino/wiring.o
+                                                  ./src/process_g_code.o
 delayMicroseconds                                 ./lib/arduino/wiring.o
 delayMicrosecondsInterruptible(unsigned int)      ./src/firmware.o
 detachInterrupt                                   ./lib/arduino/WInterrupts.o
@@ -1642,39 +1852,77 @@ digital_pin_to_timer_PGM                          ./lib/arduino/pins_arduino.o
 disableTimer(unsigned char)                       ./lib/arduino/Tone.o
 disableTimerInterrupt()                           ./src/firmware.o
 enableTimerInterrupt()                            ./src/firmware.o
+errno                                             /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(errno.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
 ex0                                               ./src/firmware.o
 exit                                              /usr/lib/gcc/avr/4.3.5/avr51/libgcc.a(_exit.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/crtm1280.o
-extruder_in_use                                   ./src/vectors.o
-                                                  ./src/toolhead_stepper.o
+extruder_in_use                                   ./src/toolhead_stepper.o
+                                                  ./src/process_g_code.o
                                                   ./src/firmware.o
-                                                  ./src/fancy.o
                                                   ./src/cartesian_dda.o
+extruder_speed                                    ./src/process_g_code.o
 fabsv(FloatPoint const&)                          ./src/cartesian_dda.o
+fp                                                ./src/process_g_code.o
+fputc                                             /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(fputc.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
 free                                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(malloc.o)
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(realloc.o)
                                                   ./lib/arduino/WString.o
+gc                                                ./src/process_g_code.o
 getTimerCeiling(long const&)                      ./src/firmware.o
 getTimerResolution(long const&)                   ./src/firmware.o
+get_and_do_command()                              ./src/process_g_code.o
+                                                  ./src/firmware.o
+get_toolhead                                      ./src/process_g_code.o
 handle_heater_out(char*, temperature_sensor*, int) ./src/firmware.o
 head                                              ./src/firmware.o
 heatedBed                                         ./src/firmware.o
+                                                  ./src/process_g_code.o
+heater_error_message                              ./src/firmware.o
 heater_init                                       ./src/firmware.o
 heater_pump                                       ./src/firmware.o
 heater_shutdown                                   ./src/firmware.o
+hostcom::get()                                    ./src/process_g_code.o
+hostcom::gotData()                                ./src/process_g_code.o
+hostcom::hostcom()                                ./src/hostcom.o
+                                                  ./src/vectors.o
+                                                  ./src/toolhead_stepper.o
+                                                  ./src/process_g_code.o
+                                                  ./src/firmware.o
+                                                  ./src/fancy.o
+                                                  ./src/cartesian_dda.o
+hostcom::put(char*)                               ./src/firmware.o
+hostcom::reset()                                  ./src/hostcom.o
+hostcom::sendMessage(bool)                        ./src/process_g_code.o
+                                                  ./src/firmware.o
+hostcom::setBTemp(int)                            ./src/process_g_code.o
+hostcom::setCoords(FloatPoint const&)             ./src/process_g_code.o
+hostcom::setETemp(int)                            ./src/process_g_code.o
+hostcom::setFatal()                               ./src/firmware.o
+hostcom::setResend(long)                          ./src/process_g_code.o
+hostcom::start()                                  ./src/firmware.o
+hostcom::string()                                 ./src/process_g_code.o
+                                                  ./src/firmware.o
 init                                              ./lib/arduino/wiring.o
                                                   ./src/main.o
 init_analog_thermal_sensor_pin                    ./src/firmware.o
 init_extruder(int, int, int, int, int, int, int)  ./src/firmware.o
 init_heater_pins                                  ./src/firmware.o
+init_process_string()                             ./src/process_g_code.o
+                                                  ./src/firmware.o
 init_temperature_sensor                           ./src/firmware.o
 init_toolhead                                     ./src/firmware.o
 init_toolhead_stepper(toolhead_stepper_data*)     ./src/toolhead_stepper.o
 interruptBlink                                    ./src/firmware.o
 isspace                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(isspace.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
                                                   ./lib/arduino/WString.o
 itoa                                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
                                                   ./lib/arduino/WString.o
+last_gcode_g                                      ./src/process_g_code.o
 led                                               ./src/firmware.o
 loop                                              ./src/firmware.o
                                                   ./src/main.o
@@ -1703,6 +1951,7 @@ nonest                                            ./src/firmware.o
 operator*(FloatPoint const&, FloatPoint const&)   ./src/cartesian_dda.o
 operator-(FloatPoint const&, FloatPoint const&)   ./src/cartesian_dda.o
 operator-(LongPoint const&, LongPoint const&)     ./src/cartesian_dda.o
+parse_string(GcodeParser*, char*, int)            ./src/process_g_code.o
 pinMode                                           ./lib/arduino/wiring_digital.o
                                                   ./lib/arduino/wiring_analog.o
                                                   ./lib/arduino/Tone.o
@@ -1723,10 +1972,14 @@ printInteger                                      ./lib/WiringSerial/wiring_seri
 printIntegerInBase                                ./lib/WiringSerial/wiring_serial.o
 printPgmString                                    ./lib/WiringSerial/wiring_serial.o
 printString                                       ./lib/WiringSerial/wiring_serial.o
+process_string(char*, int)                        ./src/process_g_code.o
 pulseIn                                           ./lib/arduino/wiring_pulse.o
 pump_all_toolheads                                ./src/firmware.o
 pump_toolhead_extruder(void*, unsigned long)      ./src/toolhead_stepper.o
                                                   ./src/firmware.o
+qEmpty()                                          ./src/firmware.o
+                                                  ./src/process_g_code.o
+qMove(FloatPoint const&)                          ./src/process_g_code.o
 random                                            /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
                                                   ./lib/arduino/WMath.o
 random(long)                                      ./lib/arduino/WMath.o
@@ -1745,14 +1998,21 @@ rx_buffer2                                        ./lib/arduino/HardwareSerial.o
 rx_buffer3                                        ./lib/arduino/HardwareSerial.o
 rx_buffer_head                                    ./lib/WiringSerial/wiring_serial.o
 rx_buffer_tail                                    ./lib/WiringSerial/wiring_serial.o
+scan_float(char*, float*, unsigned int*, unsigned int) ./src/process_g_code.o
+scan_int(char*, int*, unsigned int*, unsigned int) ./src/process_g_code.o
+scan_long(char*, long*, unsigned int*, unsigned int) ./src/process_g_code.o
 serialAvailable                                   ./lib/WiringSerial/wiring_serial.o
 serialFlush                                       ./lib/WiringSerial/wiring_serial.o
 serialRead                                        ./lib/WiringSerial/wiring_serial.o
 serialWrite                                       ./lib/WiringSerial/wiring_serial.o
+serial_count                                      ./src/process_g_code.o
+setPosition(FloatPoint const&)                    ./src/process_g_code.o
 setTimer(long)                                    ./src/firmware.o
                                                   ./src/cartesian_dda.o
 setTimerCeiling(unsigned int)                     ./src/firmware.o
 setTimerResolution(unsigned char)                 ./src/firmware.o
+setUnits(bool)                                    ./src/process_g_code.o
+set_solenoid                                      ./src/process_g_code.o
 set_toolhead_steper_enable(toolhead*, int)        ./src/toolhead_stepper.o
 set_toolhead_steper_speed(toolhead*, int)         ./src/toolhead_stepper.o
 set_toolhead_steper_steps_per_mm(toolhead*, int)  ./src/toolhead_stepper.o
@@ -1761,12 +2021,22 @@ set_toolhead_stepper_direction(toolhead*, int)    ./src/toolhead_stepper.o
 set_toolhead_stepper_enable(toolhead*, int)       ./src/cartesian_dda.o
 setup                                             ./src/firmware.o
                                                   ./src/main.o
+setupGcodeProcessor()                             ./src/process_g_code.o
+                                                  ./src/firmware.o
 setupTimerInterrupt()                             ./src/firmware.o
 shiftIn                                           ./lib/arduino/wiring_shift.o
 shiftOut                                          ./lib/arduino/wiring_shift.o
 shutdown()                                        ./src/firmware.o
+                                                  ./src/process_g_code.o
 shutdown_all_toolheads                            ./src/firmware.o
 shutdown_heater_pins                              ./src/firmware.o
+sp                                                ./src/process_g_code.o
+specialMoveX(float const&, float const&)          ./src/process_g_code.o
+specialMoveY(float const&, float const&)          ./src/process_g_code.o
+specialMoveZ(float const&, float const&)          ./src/process_g_code.o
+sprintf                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
+                                                  ./src/process_g_code.o
+                                                  ./src/firmware.o
 sqrt                                              /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libm.a(sqrt.o)
                                                   ./src/cartesian_dda.o
 srandom                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(random.o)
@@ -1784,10 +2054,16 @@ strcpy                                            /usr/lib/gcc/avr/4.3.5/../../.
                                                   ./lib/arduino/WString.o
 strlen                                            /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strlen.o)
                                                   ./lib/arduino/WString.o
+strncasecmp_P                                     /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncasecmp_P.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
 strncmp                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncmp.o)
                                                   ./lib/arduino/WString.o
 strncpy                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strncpy.o)
                                                   ./lib/arduino/WString.o
+strnlen                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+strnlen_P                                         /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strnlen_P.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
 strrchr                                           /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrchr.o)
                                                   ./lib/arduino/WString.o
 strrev                                            /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strrev.o)
@@ -1796,6 +2072,10 @@ strrev                                            /usr/lib/gcc/avr/4.3.5/../../.
                                                   /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(itoa.o)
 strstr                                            /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strstr.o)
                                                   ./lib/arduino/WString.o
+strtod                                            /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtod.o)
+                                                  ./src/process_g_code.o
+strtol                                            /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(strtol.o)
+                                                  ./src/process_g_code.o
 tail                                              ./src/firmware.o
 timer0_millis                                     ./lib/arduino/wiring.o
 timer0_overflow_count                             ./lib/arduino/wiring.o
@@ -1827,12 +2107,20 @@ toupper                                           /usr/lib/gcc/avr/4.3.5/../../.
                                                   ./lib/arduino/WString.o
 ultoa                                             /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(ultoa.o)
                                                   ./lib/arduino/WString.o
+vfprintf                                          /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(vfprintf_std.o)
+                                                  /usr/lib/gcc/avr/4.3.5/../../../avr/lib/avr51/libc.a(sprintf.o)
 vtable for HardwareSerial                         ./lib/arduino/HardwareSerial.o
 vtable for Print                                  ./lib/arduino/Print.o
                                                   ./lib/arduino/HardwareSerial.o
 vtable for Stream                                 ./lib/arduino/HardwareSerial.o
 waitForAllTemperatures                            ./src/firmware.o
+                                                  ./src/process_g_code.o
 waitForTemperature                                ./src/firmware.o
+                                                  ./src/process_g_code.o
 where_i_am                                        ./src/firmware.o
+                                                  ./src/process_g_code.o
                                                   ./src/cartesian_dda.o
 write_heater_pins                                 ./src/firmware.o
+zeroX()                                           ./src/process_g_code.o
+zeroY()                                           ./src/process_g_code.o
+zeroZ()                                           ./src/process_g_code.o

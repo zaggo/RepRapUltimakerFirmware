@@ -5,6 +5,11 @@
 #include <avr/pgmspace.h>
 
 
+extern "C" {
+  #include <toolhead.h>
+  #include <hardware/arduino_toolhead.h>
+}
+
 #include "firmware.h"
 
 
@@ -19,6 +24,17 @@ Before changing this interpreter, read this page:
 http://objects.reprap.org/wiki/Mendel_User_Manual:_RepRapGCodes
 
 */
+
+struct heater * waitForTemperature;
+int waitForAllTemperatures;
+
+heater *heatedBed;
+
+#if EXTRUDER_COUNT == 2
+struct toolhead ex1;
+#endif
+
+struct toolhead ex0;
 
 
 // Sanguino G-code Interpreter
@@ -127,13 +143,13 @@ ISR(TIMER1_COMPA_vect)
   if(cdda[tail]->active())
       cdda[tail]->dda_step();
   else
-	  //TODO:readddQMove();
+	  dQMove();
   nonest = false;
 }
 
 void setup()
 {
-	//TODO:readdtalkToHost.put("init?");
+	talkToHost.put("init?");
   
   nonest = false;
   disableTimerInterrupt();
@@ -145,7 +161,7 @@ void setup()
   waitForTemperature = 0;
   
 
-  //TODO:readdsetupGcodeProcessor();
+  setupGcodeProcessor();
 
   // init extruders
   ex0 = *init_extruder(EXTRUDER_0_HEATER_PIN, EXTRUDER_0_TEMPERATURE_PIN, EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_PIN, E0_STEPS_PER_MM, THERMAL_CUTOFF);
@@ -171,9 +187,9 @@ void setup()
   
   //setExtruder();
   
-  //TODO:readdinit_process_string();
+  init_process_string();
   
-  //TODO:readdtalkToHost.start();
+  talkToHost.start();
 
   // Heated Bed Heater
   heatedBed = (struct heater *) malloc(sizeof(struct heater));
@@ -256,7 +272,7 @@ void shutdown()
 
 void handle_heater_out(char* name, struct temperature_sensor * sensor, int error_code)
 {
-	//TODO:readdtalkToHost.put("reading output\n");
+	talkToHost.put("reading output\n");
   // heater debugging output (if enabled)
 #ifdef DEBUG_PID
 /*
@@ -278,9 +294,9 @@ void handle_heater_out(char* name, struct temperature_sensor * sensor, int error
   // handle heater errors
   if (error_code == 0) return;
 
-  //TODO:readdsprintf(talkToHost.string(), "error: %s %s", name, heater_error_message(sensor, error_code) );
-  //TODO:readdtalkToHost.setFatal();
-  //TODO:readdtalkToHost.sendMessage(true);
+  sprintf(talkToHost.string(), "error: %s %s", name, heater_error_message(sensor, error_code) );
+  talkToHost.setFatal();
+  talkToHost.sendMessage(true);
 }
 
 char *EXTRUDER_NAME = "extruder";
@@ -291,21 +307,21 @@ void manage()
 {
 //  talkToHost.put("starting manage\n");
   // manage the extruders
-	//TODO:readdtalkToHost.put("starting extruders\n");
+	talkToHost.put("starting extruders\n");
   //TODO: independent error messages for each toolhead
   handle_heater_out( EXTRUDER_NAME, ex0.heater->sensor, pump_all_toolheads(millis()) );
-  //TODO:readdtalkToHost.put("ending extruders\n");
+  talkToHost.put("ending extruders\n");
 
   // manage the heated bed
-  //TODO:readdtalkToHost.put("starting heater\n");
+  talkToHost.put("starting heater\n");
   handle_heater_out( HEATED_BED_NAME, heatedBed->sensor, heater_pump(heatedBed, millis()) );
-  //TODO:readdtalkToHost.put("ending heater\n");
+  talkToHost.put("ending heater\n");
 
   // manage the fancy lcd display
 #ifdef FANCY_LCD
   fancy_update();
 #endif
-  //TODO:readdtalkToHost.put("mini-mooo");
+  talkToHost.put("mini-mooo");
 }
 
 
@@ -315,11 +331,11 @@ void manage()
 void loop()
 {
   nonest = false;
-  //TODO:readdtalkToHost.put("loop");
+  talkToHost.put("loop");
   manage();
   if (waitForTemperature == 0 && waitForAllTemperatures == 0)
   {
-	  //TODO:readdget_and_do_command();
+	  get_and_do_command();
   }
   else
   {
