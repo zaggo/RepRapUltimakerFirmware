@@ -5,8 +5,6 @@ extern "C" {
 
 #include "firmware.h"
 
-extern struct toolhead * extruder_in_use = 0;
-
 
 int pump_toolhead_extruder(void * md, unsigned long time)
 {
@@ -14,7 +12,7 @@ int pump_toolhead_extruder(void * md, unsigned long time)
   // Managed by the cartesian_dda code.
 }
 
-int init_toolhead_stepper(struct toolhead_stepper_data * motor_data)
+int init_toolhead_stepper(toolhead_stepper_data * motor_data)
 {
   pinMode(motor_data->step_pin, OUTPUT);
   pinMode(motor_data->dir_pin, OUTPUT);

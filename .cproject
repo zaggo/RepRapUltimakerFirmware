@@ -32,7 +32,7 @@
 							<tool id="de.innot.avreclipse.tool.compiler.winavr.app.debug.266655333" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.app.debug">
 								<option id="de.innot.avreclipse.compiler.option.debug.level.1538805361" name="Generate Debugging Info" superClass="de.innot.avreclipse.compiler.option.debug.level"/>
 								<option id="de.innot.avreclipse.compiler.option.optimize.1907919030" name="Optimization Level" superClass="de.innot.avreclipse.compiler.option.optimize"/>
-								<option id="de.innot.avreclipse.compiler.option.incpath.1054293280" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath"/>
+								<option id="de.innot.avreclipse.compiler.option.incpath.1054293280" name="Include Paths (-I)" superClass="de.innot.avreclipse.compiler.option.incpath" valueType="includePath"/>
 								<inputType id="de.innot.avreclipse.compiler.winavr.input.1850572489" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
 							</tool>
 							<tool id="de.innot.avreclipse.tool.cppcompiler.app.debug.173573290" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.app.debug">
@@ -40,7 +40,7 @@
 								<option id="de.innot.avreclipse.cppcompiler.option.optimize.1331024515" name="Optimization Level" superClass="de.innot.avreclipse.cppcompiler.option.optimize"/>
 								<option id="de.innot.avreclipse.cppcompiler.option.incpath.750329525" name="Include Paths (-I)" superClass="de.innot.avreclipse.cppcompiler.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RepRapUltimakerFirmware/lib/arduino}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/toolhead-lib/lib/wiring}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RepRapUltimakerFirmware/lib/WiringSerial}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/toolhead-lib/src}&quot;"/>
 								</option>
 								<inputType id="de.innot.avreclipse.cppcompiler.input.1178815557" superClass="de.innot.avreclipse.cppcompiler.input"/>
@@ -65,7 +65,9 @@
 					</sourceEntries>
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="toolhead-lib;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
 			<storageModule moduleId="scannerConfiguration">
 				<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 				<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">

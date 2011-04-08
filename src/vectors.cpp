@@ -9,7 +9,7 @@ extern "C" {
 #include <math.h>
 #include "firmware.h"
 
-inline FloatPoint operator+(const FloatPoint& a, const FloatPoint& b)
+ FloatPoint operator+(const FloatPoint& a, const FloatPoint& b)
 {
   FloatPoint result;
   result.x = a.x + b.x;
@@ -20,7 +20,7 @@ inline FloatPoint operator+(const FloatPoint& a, const FloatPoint& b)
   return result;
 }  
 
-inline FloatPoint operator-(const FloatPoint& a, const FloatPoint& b)
+ FloatPoint operator-(const FloatPoint& a, const FloatPoint& b)
 {
   FloatPoint result;
   result.x = a.x - b.x;
@@ -34,7 +34,7 @@ inline FloatPoint operator-(const FloatPoint& a, const FloatPoint& b)
 
 // NB - the next gives neither the scalar nor the vector product
 
-inline FloatPoint operator*(const FloatPoint& a, const FloatPoint& b)
+ FloatPoint operator*(const FloatPoint& a, const FloatPoint& b)
 {
   FloatPoint result;
   result.x = a.x * b.x;
@@ -47,7 +47,7 @@ inline FloatPoint operator*(const FloatPoint& a, const FloatPoint& b)
 
 // Can't use fabs for this as it's defined somewhere in a #define
 
-inline FloatPoint fabsv(const FloatPoint& a)
+ FloatPoint fabsv(const FloatPoint& a)
 {
   FloatPoint result;
   result.x = fabs(a.x);
@@ -59,7 +59,7 @@ inline FloatPoint fabsv(const FloatPoint& a)
 } 
 
 
-inline LongPoint operator+(const LongPoint& a, const LongPoint& b)
+ LongPoint operator+(const LongPoint& a, const LongPoint& b)
 {
   LongPoint result;
   result.x = a.x + b.x;
@@ -70,7 +70,7 @@ inline LongPoint operator+(const LongPoint& a, const LongPoint& b)
   return result;
 }  
 
-inline LongPoint operator-(const LongPoint& a, const LongPoint& b)
+ LongPoint operator-(const LongPoint& a, const LongPoint& b)
 {
   LongPoint result;
   result.x = a.x - b.x;
@@ -82,7 +82,7 @@ inline LongPoint operator-(const LongPoint& a, const LongPoint& b)
 } 
 
 
-inline LongPoint absv(const LongPoint& a)
+ LongPoint absv(const LongPoint& a)
 {
   LongPoint result;
   result.x = abs(a.x);
@@ -94,7 +94,7 @@ inline LongPoint absv(const LongPoint& a)
 } 
 
 
-inline LongPoint roundv(const FloatPoint& a)
+ LongPoint roundv(const FloatPoint& a)
 {
   LongPoint result;
   result.x = round(a.x);
@@ -105,7 +105,7 @@ inline LongPoint roundv(const FloatPoint& a)
   return result;
 } 
 
-inline LongPoint to_steps(const FloatPoint& units, const FloatPoint& position)
+LongPoint to_steps(const FloatPoint& units, const FloatPoint& position)
 {
         return roundv(units*position);
 }

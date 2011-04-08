@@ -91,23 +91,23 @@ FloatPoint sp;
 byte SendDebug = DEBUG_INFO | DEBUG_ERRORS;
 
 
-// The following three inline functions are used for things like return to 0
+// The following three functions are used for things like return to 0
 
-inline void specialMoveX(const float& x, const float& feed) {
+void specialMoveX(const float& x, const float& feed) {
     sp = where_i_am;
     sp.x = x;
     sp.f = feed;
     qMove(sp);
 }
 
-inline void specialMoveY(const float& y, const float& feed) {
+void specialMoveY(const float& y, const float& feed) {
     sp = where_i_am;
     sp.y = y;
     sp.f = feed;
     qMove(sp);
 }
 
-inline void specialMoveZ(const float& z, const float& feed) {
+void specialMoveZ(const float& z, const float& feed) {
     sp = where_i_am;
     sp.z = z;
     sp.f = feed;
@@ -164,7 +164,7 @@ GcodeParser gc; /* string parse result */
 
 //init our string processing
 
-inline void init_process_string() {
+void init_process_string() {
     serial_count = 0;
     comment = false;
 }

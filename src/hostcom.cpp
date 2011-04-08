@@ -12,7 +12,7 @@ extern "C" {
 
 #include "firmware.h"
 
-inline hostcom::hostcom()
+hostcom::hostcom()
 {
   fatal = false;
   reset();
@@ -20,19 +20,19 @@ inline hostcom::hostcom()
 
 // Wrappers for the comms interface
 
-inline void hostcom::putInit() {  Serial.begin(HOST_BAUD); }
-inline void hostcom::put(char* s) { Serial.print(s); }
-inline void hostcom::put(const float& f) { Serial.print(f); }
-inline void hostcom::put(const long& l) { Serial.print(l); }
-inline void hostcom::put(int i) { Serial.print(i); }
-inline void hostcom::putEnd() { Serial.println(); }
-inline char hostcom::gotData() { return Serial.available(); }
-inline char hostcom::get() { return Serial.read(); }
+void hostcom::putInit() {  Serial.begin(HOST_BAUD); }
+void hostcom::put(char* s) { Serial.print(s); }
+void hostcom::put(const float& f) { Serial.print(f); }
+void hostcom::put(const long& l) { Serial.print(l); }
+void hostcom::put(int i) { Serial.print(i); }
+void hostcom::putEnd() { Serial.println(); }
+char hostcom::gotData() { return Serial.available(); }
+char hostcom::get() { return Serial.read(); }
 
 
 // called after each message has been sent
 
-inline void hostcom::reset()
+void hostcom::reset()
 {
   etemp = NO_TEMP;
   btemp = NO_TEMP;
@@ -44,7 +44,7 @@ inline void hostcom::reset()
 
 // Called once when the machine boots
 
-inline void hostcom::start()
+void hostcom::start()
 {
   putInit();
   put("start");
@@ -54,28 +54,28 @@ inline void hostcom::start()
 // Return the place to write messages into.  Typically this is used in lines like:
 // sprintf(talkToHost.string(), "Echo: %s", cmdbuffer);
 
-inline char* hostcom::string()
+char* hostcom::string()
 {
   return message;
 }
 
 // Set the extruder temperature to be returned.
 
-inline void hostcom::setETemp(int et)
+void hostcom::setETemp(int et)
 {
   etemp = et;
 }
 
 // Set the bed temperature to be returned
 
-inline void hostcom::setBTemp(int bt)
+void hostcom::setBTemp(int bt)
 {
   btemp = bt;
 }
 
 // Set the machine's coordinates to be returned
 
-inline void hostcom::setCoords(const FloatPoint& where)
+void hostcom::setCoords(const FloatPoint& where)
 {
   x = where.x;
   y = where.y;
@@ -86,21 +86,21 @@ inline void hostcom::setCoords(const FloatPoint& where)
 
 // Request a resend of line ln
 
-inline void hostcom::setResend(long ln)
+void hostcom::setResend(long ln)
 {
   resend = ln;
 }
 
 // Flag that a fatal error has occurred (such as a temperature sensor failure).
 
-inline void hostcom::setFatal()
+void hostcom::setFatal()
 {
   fatal = true;
 }
 
 // Send the text stored (if any) to the host.
 
-inline void hostcom::sendtext(bool doMessage)
+void hostcom::sendtext(bool doMessage)
 {
   if(!doMessage)
     return;
@@ -112,7 +112,7 @@ inline void hostcom::sendtext(bool doMessage)
 
 // Master function to return messages to the host
 
-inline void hostcom::sendMessage(bool doMessage)
+void hostcom::sendMessage(bool doMessage)
 {
   if(fatal)
   {

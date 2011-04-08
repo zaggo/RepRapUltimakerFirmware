@@ -18,10 +18,10 @@ struct FloatPoint
         float f;   // Feedrate
 };
 
-inline FloatPoint operator+(const FloatPoint& a, const FloatPoint& b);
-inline FloatPoint operator-(const FloatPoint& a, const FloatPoint& b);
-inline FloatPoint operator*(const FloatPoint& a, const FloatPoint& b);
-inline FloatPoint fabsv(const FloatPoint& a);
+ FloatPoint operator+(const FloatPoint& a, const FloatPoint& b);
+ FloatPoint operator-(const FloatPoint& a, const FloatPoint& b);
+ FloatPoint operator*(const FloatPoint& a, const FloatPoint& b);
+ FloatPoint fabsv(const FloatPoint& a);
 
 // Integer numbers of steps
 struct LongPoint
@@ -33,11 +33,11 @@ struct LongPoint
         long f;   // Feedrate
 };
 
-inline LongPoint operator+(const LongPoint& a, const LongPoint& b);
-inline LongPoint operator-(const LongPoint& a, const LongPoint& b);
-inline LongPoint absv(const LongPoint& a);
-inline LongPoint roundv(const FloatPoint& a);
-inline LongPoint to_steps(const FloatPoint& units, const FloatPoint& position);
+ LongPoint operator+(const LongPoint& a, const LongPoint& b);
+ LongPoint operator-(const LongPoint& a, const LongPoint& b);
+ LongPoint absv(const LongPoint& a);
+ LongPoint roundv(const FloatPoint& a);
+LongPoint to_steps(const FloatPoint& units, const FloatPoint& position);
 
 
 #endif /* VECTORS_H_ */

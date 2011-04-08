@@ -57,8 +57,11 @@ sizedummy \
 # All Target
 all: RepRapUltimakerFirmware.elf secondary-outputs
 
+dependents:
+	-cd /home/fumon/ddt/proj/RepRapWorkspace/firmware-hacker-workspace/toolhead-lib/Debug && $(MAKE) all
+
 # Tool invocations
-RepRapUltimakerFirmware.elf: $(OBJS) $(USER_OBJS)
+RepRapUltimakerFirmware.elf: $(OBJS) $(USER_OBJS) /home/fumon/ddt/proj/RepRapWorkspace/firmware-hacker-workspace/toolhead-lib/Debug/toolhead-lib
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
 	avr-g++ -Wl,-Map,RepRapUltimakerFirmware.map,--cref -mmcu=atmega1280 -o"RepRapUltimakerFirmware.elf" $(OBJS) $(USER_OBJS) $(LIBS)
@@ -86,5 +89,6 @@ secondary-outputs: $(FLASH_IMAGE) $(SIZEDUMMY)
 
 .PHONY: all clean dependents
 .SECONDARY:
+/home/fumon/ddt/proj/RepRapWorkspace/firmware-hacker-workspace/toolhead-lib/Debug/toolhead-lib:
 
 -include ../makefile.targets

@@ -3,6 +3,7 @@
 	<name>test</name>
 	<comment></comment>
 	<projects>
+		<project>toolhead-lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

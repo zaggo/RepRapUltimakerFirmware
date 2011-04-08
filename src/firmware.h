@@ -35,29 +35,29 @@ void shutdown();
 
 void setTimer(long delay);
 
-// Inline interrupt control functions
+//  interrupt control functions
 
 extern void set_toolhead_stepper_enable(struct toolhead * t, int enable);
 
-inline void enableTimerInterrupt();
+ void enableTimerInterrupt();
 
-inline void disableTimerInterrupt();
-inline void cancelAndClearQueue();
+ void disableTimerInterrupt();
+ void cancelAndClearQueue();
 
 
-inline void setTimerCeiling(unsigned int c);
+ void setTimerCeiling(unsigned int c);
 
-inline void resetTimer();
+ void resetTimer();
 
 void setupTimerInterrupt();
 
 void setTimerResolution(byte r);
 
-inline void qMove(const FloatPoint& p);
-inline bool qEmpty();
-inline void dQMove();
-inline void setUnits(bool u);
-inline void setPosition(const FloatPoint& p);
+ void qMove(const FloatPoint& p);
+ bool qEmpty();
+ void dQMove();
+ void setUnits(bool u);
+ void setPosition(const FloatPoint& p);
 
 
 // equal to null if we are not waiting for a heater to reach temperature or the heater we are waiting for
@@ -67,9 +67,9 @@ extern int waitForAllTemperatures;
 extern heater *heatedBed;
 
 #if EXTRUDER_COUNT == 2
-extern struct toolhead ex1;
+extern toolhead ex1;
 #endif
 
-extern struct toolhead ex0;
+extern toolhead ex0;
 
 #endif /* REPRAPULTIMAKERFIRMWARE_H_ */

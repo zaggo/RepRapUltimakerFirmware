@@ -355,14 +355,14 @@ void loop()
 
 // The move buffer
 
-inline void cancelAndClearQueue()
+ void cancelAndClearQueue()
 {
 	tail = head;	// clear buffer
 	for(int i=0;i<BUFFER_SIZE;i++)
 		cdda[i]->shutdown();
 }
 
-inline bool qFull()
+ bool qFull()
 {
   if(tail == 0)
     return head == (BUFFER_SIZE - 1);
@@ -370,12 +370,12 @@ inline bool qFull()
     return head == (tail - 1);
 }
 
-inline bool qEmpty()
+ bool qEmpty()
 {
    return tail == head && !cdda[tail]->active();
 }
 
-inline void qMove(const FloatPoint& p)
+ void qMove(const FloatPoint& p)
 {
   while(qFull()) delay(WAITING_DELAY);
   byte h = head; 
@@ -386,7 +386,7 @@ inline void qMove(const FloatPoint& p)
   head = h;
 }
 
-inline void dQMove()
+ void dQMove()
 {
   if(qEmpty())
     return;
@@ -398,14 +398,14 @@ inline void dQMove()
   tail = t; 
 }
 
-inline void setUnits(bool u)
+ void setUnits(bool u)
 {
    for(byte i = 0; i < BUFFER_SIZE; i++)
      cdda[i]->set_units(u); 
 }
 
 
-inline void setPosition(const FloatPoint& p)
+ void setPosition(const FloatPoint& p)
 {
   where_i_am = p;  
 }
@@ -558,7 +558,7 @@ byte getTimerResolution(const long& delay)
 // Note - it is up to the user to call enableTimerInterrupt() after a call
 // to this function.
 
-inline void setTimer(long delay)
+ void setTimer(long delay)
 {
 	// delay is the delay between steps in microsecond ticks.
 	//
@@ -599,24 +599,24 @@ void delayMicrosecondsInterruptible(unsigned int us)
     );
 }
 
-// Inline interrupt control functions
+//  interrupt control functions
 
-inline void enableTimerInterrupt() 
+ void enableTimerInterrupt()
 {
    TIMSK1 |= (1<<OCIE1A);
 }
         
-inline void disableTimerInterrupt() 
+ void disableTimerInterrupt()
 {
      TIMSK1 &= ~(1<<OCIE1A);
 }
         
-inline void setTimerCeiling(unsigned int c) 
+ void setTimerCeiling(unsigned int c)
 {
     OCR1A = c;
 }
 
-inline void resetTimer()
+ void resetTimer()
 {
   TCNT2 = 0;
 }
