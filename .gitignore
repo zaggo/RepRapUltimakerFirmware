@@ -17,3 +17,20 @@
 #Excutables created by this code
 Debug/RepRapUltimakerFirmware
 Release/RepRapUltimakerFirmware
+
+# Eclipse gitignore
+in/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# CDT-specific
+.cproject
+
